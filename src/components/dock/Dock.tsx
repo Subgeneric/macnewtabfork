@@ -13,7 +13,6 @@ import { ReactComponent as LaunchpadIcon } from "../../assets/launchpad.svg";
 import { ReactComponent as LeftArrow } from "../../assets/left-arrow.svg";
 import { DockIcon } from "./DockIcon";
 import { DockFolderIcon } from "./DockFolderIcon";
-import { DockFolderModal } from "./DockFolderModal";
 import { ReactComponent as RightArrow } from "../../assets/right-arrow.svg";
 import { ReactComponent as TodoIcon } from "../../assets/todo.svg";
 import { ReactComponent as StickyNotesIcon } from "../../assets/sticky-notes.svg";
@@ -21,13 +20,16 @@ import { ReactComponent as FreeformIcon } from "../../assets/freeform.svg";
 import { ReactComponent as FocusIcon } from "../../assets/focus.svg";
 import { ReactComponent as ScreenRecorderIcon } from "../../assets/screen-recorder.svg";
 import { ReactComponent as AppStoreIcon } from "../../assets/app-store.svg";
-import Launchpad from "../launchpad/Launchpad";
 
 import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
 
+const LaunchpadLazy = lazy(() => import("../launchpad/Launchpad"));
+const DockFolderModalLazy = lazy(() =>
+  import("./DockFolderModal").then((m) => ({ default: m.DockFolderModal })),
+);
 const SettingsLazy = lazy(() => import("../settings/Settings"));
 const AppStoreLazy = lazy(() => import("../app-store/AppStore"));
 const FreeformLazy = lazy(() => import("../freeform/Freeform"));
@@ -48,6 +50,10 @@ const Dock = memo(() => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [hasOpenedSettings, setHasOpenedSettings] = useState(false);
   const [launchpadVisible, setLaunchpadVisible] = useState(false);
+  const [hasOpenedLaunchpad, setHasOpenedLaunchpad] = useState(false);
+  useEffect(() => {
+    if (launchpadVisible) setHasOpenedLaunchpad(true);
+  }, [launchpadVisible]);
   const [appStoreVisible, setAppStoreVisible] = useState(false);
   const [hasOpenedAppStore, setHasOpenedAppStore] = useState(false);
   const [todoDialogOpen, setTodoDialogOpen] = useState(false);
@@ -450,7 +456,14 @@ const Dock = memo(() => {
           />
         </Suspense>
       )}
-      <Launchpad visible={launchpadVisible} onClose={handleLaunchpadClose} />
+      {hasOpenedLaunchpad && (
+        <Suspense fallback={null}>
+          <LaunchpadLazy
+            visible={launchpadVisible}
+            onClose={handleLaunchpadClose}
+          />
+        </Suspense>
+      )}
       {hasOpenedTodo && (
         <Suspense fallback={null}>
           <TodoLazy open={todoDialogOpen} onClose={handleTodoClose} />
@@ -485,13 +498,15 @@ const Dock = memo(() => {
         </Suspense>
       )}
       {openedFolder && (
-        <DockFolderModal
-          title={openedFolder.title}
-          links={openedFolder.links}
-          activeSpaceId={activeSpaceId}
-          onClose={() => setOpenedFolder(null)}
-          separatePageSite={separatePageSite}
-        />
+        <Suspense fallback={null}>
+          <DockFolderModalLazy
+            title={openedFolder.title}
+            links={openedFolder.links}
+            activeSpaceId={activeSpaceId}
+            onClose={() => setOpenedFolder(null)}
+            separatePageSite={separatePageSite}
+          />
+        </Suspense>
       )}
     </>
   );

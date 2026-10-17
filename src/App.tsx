@@ -5,11 +5,12 @@ import {
   useEffect,
   useMemo,
   useState,
+  lazy,
+  Suspense,
 } from "react";
 import "./App.css";
 import WidgetsContainer from "./components/widgets-container/WidgetsContainer";
 import RightWidgetsContainer from "./components/right-widgets/RightWidgetsContainer";
-import FullScreenClock from "./components/fullscreen-clock/FullScreenClock";
 import {
   SEARCH_ENGINE_LOCAL_STORAGE_KEY,
   searchEngineKeys,
@@ -18,11 +19,20 @@ import { getResolvedKey } from "./utils/spacesStorage";
 import { AppContext } from "./context/provider";
 import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
-import TabManager from "./components/tab-manager/TabManager";
-import StickyNotes from "./components/sticky-notes/StickyNotes";
-import DynamicWallpaper from "./components/wallpaper/DynamicWallpaper";
-import InteractiveWallpaper from "./components/wallpaper/InteractiveWallpaper";
 import FooterNotice from "./components/footer-notice/FooterNotice";
+
+// Rarely-needed pieces load on demand to keep the first paint light
+const TabManager = lazy(() => import("./components/tab-manager/TabManager"));
+const StickyNotes = lazy(() => import("./components/sticky-notes/StickyNotes"));
+const DynamicWallpaper = lazy(
+  () => import("./components/wallpaper/DynamicWallpaper"),
+);
+const InteractiveWallpaper = lazy(
+  () => import("./components/wallpaper/InteractiveWallpaper"),
+);
+const FullScreenClock = lazy(
+  () => import("./components/fullscreen-clock/FullScreenClock"),
+);
 
 const App = function App() {
   const [searchEngine, setSearchEngine] = useState("");
@@ -262,10 +272,14 @@ const App = function App() {
         <div className="tv-static-overlay" aria-hidden="true" />
       )}
       {wallpaperType === "dynamic" && (
-        <DynamicWallpaper theme={dynamicWallpaperTheme} />
+        <Suspense fallback={null}>
+          <DynamicWallpaper theme={dynamicWallpaperTheme} />
+        </Suspense>
       )}
       {wallpaperType === "interactive" && (
-        <InteractiveWallpaper theme={interactiveWallpaperTheme} />
+        <Suspense fallback={null}>
+          <InteractiveWallpaper theme={interactiveWallpaperTheme} />
+        </Suspense>
       )}
       {wallpaperType !== "dynamic" &&
         wallpaperType !== "interactive" &&
@@ -311,14 +325,16 @@ const App = function App() {
         </div>
       </div>
       <Dock />
-      {showTabManager && <TabManager />}
-      {showStickyNotes && <StickyNotes />}
-      {showFullscreenClock && (
-        <FullScreenClock
-          date={time}
-          onClose={() => setShowFullscreenClock(false)}
-        />
-      )}
+      <Suspense fallback={null}>
+        {showTabManager && <TabManager />}
+        {showStickyNotes && <StickyNotes />}
+        {showFullscreenClock && (
+          <FullScreenClock
+            date={time}
+            onClose={() => setShowFullscreenClock(false)}
+          />
+        )}
+      </Suspense>
       <FooterNotice
         storageKey="hide_footer_notice"
         title={<Translation value="hide_footer_notice_title" />}
