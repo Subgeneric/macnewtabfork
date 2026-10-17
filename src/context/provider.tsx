@@ -78,6 +78,7 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
+import { bootSignal } from "../utils/useTabVisible";
 import { generateRandomId } from "../utils/random";
 import {
   TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
@@ -969,6 +970,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     } else {
       setBackgroundImage("");
     }
+    bootSignal("wallpaperReady");
   }, [activeSpaceId]);
 
   // When activeSpaceId changes, we need to load the wallpaper for that space

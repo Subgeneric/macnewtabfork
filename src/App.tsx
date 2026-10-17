@@ -20,6 +20,7 @@ import { AppContext } from "./context/provider";
 import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
 import FooterNotice from "./components/footer-notice/FooterNotice";
+import { bootSignal } from "./utils/useTabVisible";
 
 // Rarely-needed pieces load on demand to keep the first paint light
 const TabManager = lazy(() => import("./components/tab-manager/TabManager"));
@@ -64,6 +65,11 @@ const App = function App() {
   } = useContext(AppContext);
 
   const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
+
+  // App is mounted: let the boot skeleton fade out once the wallpaper is ready
+  useEffect(() => {
+    bootSignal("appMounted");
+  }, []);
 
   useEffect(() => {
     if (isWakingUp) {

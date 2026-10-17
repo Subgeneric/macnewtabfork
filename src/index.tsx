@@ -6,17 +6,29 @@ import reportWebVitals from "./reportWebVitals";
 import AppProvider from "./context/provider";
 
 import ErrorBoundary from "./ErrorBoundary";
+import { trackTabHidden, useHasBeenVisible } from "./utils/useTabVisible";
+
+trackTabHidden();
+
+// Don't mount (or load) anything until this tab is actually shown.
+const RenderWhenVisible = () => {
+  const visible = useHasBeenVisible();
+  if (!visible) return null;
+  return (
+    <ErrorBoundary>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </ErrorBoundary>
+  );
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </ErrorBoundary>
+    <RenderWhenVisible />
   </React.StrictMode>,
 );
 
