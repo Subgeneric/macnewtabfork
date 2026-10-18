@@ -20,9 +20,61 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>New Tab</title>
+    <script src="%PUBLIC_URL%/boot.js"></script>
+    <style>
+      html { background: #efefee; }
+      #boot-skeleton {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        overflow: hidden;
+        background: var(--bs-bg, #efefee);
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        --bs-block: rgba(0, 0, 0, 0.1);
+      }
+      html[data-boot-dark] #boot-skeleton { --bs-block: rgba(255, 255, 255, 0.14); }
+      #boot-skeleton.boot-skeleton--out { opacity: 0; }
+      #boot-skeleton i {
+        display: block;
+        background: var(--bs-block);
+        filter: blur(14px);
+        animation: boot-pulse 1.6s ease-in-out infinite;
+      }
+      .bs-clock { width: 220px; height: 120px; border-radius: 28px; }
+      .bs-search { width: min(560px, 80vw); height: 52px; border-radius: 26px; }
+      .bs-tiles { display: flex; gap: 22px; }
+      .bs-tiles i { width: 56px; height: 56px; border-radius: 16px; }
+      .bs-dock {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 14px;
+        padding: 10px 16px;
+      }
+      .bs-dock i { width: 44px; height: 44px; border-radius: 12px; }
+      @keyframes boot-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-skeleton i { animation: none; }
+        #boot-skeleton { transition: none; }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="boot-skeleton" aria-hidden="true">
+      <i class="bs-clock"></i>
+      <i class="bs-search"></i>
+      <div class="bs-tiles"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bs-dock"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.

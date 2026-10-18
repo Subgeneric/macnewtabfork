@@ -1,32 +1,24 @@
-import React, { memo, useMemo } from "react";
-import ParticlesInteractiveTheme from "./interactive-themes/ParticlesInteractiveTheme";
-import HexagonGridTheme from "./interactive-themes/HexagonGridTheme";
-import WavesInteractiveTheme from "./interactive-themes/WavesInteractiveTheme";
-import FluidTheme from "./interactive-themes/FluidTheme";
-import ConstellationTheme from "./interactive-themes/ConstellationTheme";
-import GlobeTheme from "./interactive-themes/GlobeTheme";
-import NetTheme from "./interactive-themes/NetTheme";
-import SnowfallTheme from "./interactive-themes/SnowfallTheme";
-import FireworksTheme from "./interactive-themes/FireworksTheme";
-import RipplesTheme from "./interactive-themes/RipplesTheme";
-import TunnelTheme from "./interactive-themes/TunnelTheme";
-import SpaceGlobesTheme from "./interactive-themes/SpaceGlobesTheme";
-import BreakoutTheme from "./interactive-themes/BreakoutTheme";
+import React, { lazy, memo, Suspense, useMemo } from "react";
 
-const themeComponents: Record<string, React.FC> = {
-  particles: ParticlesInteractiveTheme,
-  hexagon: HexagonGridTheme,
-  waves: WavesInteractiveTheme,
-  fluid: FluidTheme,
-  constellation: ConstellationTheme,
-  globe: GlobeTheme,
-  net: NetTheme,
-  snowfall: SnowfallTheme,
-  fireworks: FireworksTheme,
-  ripples: RipplesTheme,
-  tunnel: TunnelTheme,
-  "space-globes": SpaceGlobesTheme,
-  breakout: BreakoutTheme,
+const themeComponents: Record<
+  string,
+  React.LazyExoticComponent<React.ComponentType>
+> = {
+  particles: lazy(
+    () => import("./interactive-themes/ParticlesInteractiveTheme"),
+  ),
+  hexagon: lazy(() => import("./interactive-themes/HexagonGridTheme")),
+  waves: lazy(() => import("./interactive-themes/WavesInteractiveTheme")),
+  fluid: lazy(() => import("./interactive-themes/FluidTheme")),
+  constellation: lazy(() => import("./interactive-themes/ConstellationTheme")),
+  globe: lazy(() => import("./interactive-themes/GlobeTheme")),
+  net: lazy(() => import("./interactive-themes/NetTheme")),
+  snowfall: lazy(() => import("./interactive-themes/SnowfallTheme")),
+  fireworks: lazy(() => import("./interactive-themes/FireworksTheme")),
+  ripples: lazy(() => import("./interactive-themes/RipplesTheme")),
+  tunnel: lazy(() => import("./interactive-themes/TunnelTheme")),
+  "space-globes": lazy(() => import("./interactive-themes/SpaceGlobesTheme")),
+  breakout: lazy(() => import("./interactive-themes/BreakoutTheme")),
 };
 
 // Default fallback theme key
@@ -55,7 +47,9 @@ const InteractiveWallpaper: React.FC<InteractiveWallpaperProps> = memo(
           overflow: "hidden",
         }}
       >
-        <ThemeComponent />
+        <Suspense fallback={null}>
+          <ThemeComponent />
+        </Suspense>
       </div>
     );
   },
