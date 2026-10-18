@@ -1146,3 +1146,53 @@ html.tab-hidden *::before,
 html.tab-hidden *::after {
   animation-play-state: paused !important;
 }
+
+/* ── Quality presets ─────────────────────────────────────────────── */
+.App.quality-balanced {
+  --theme-bg-blur: blur(20px);
+  --theme-bg-blur-30: blur(12px);
+  --settings-side-panel-blur: blur(20px);
+}
+
+.App.quality-lite {
+  --theme-bg-blur: none;
+  --theme-bg-blur-30: none;
+  --settings-side-panel-blur: none;
+}
+
+.App.quality-lite *:not(.wallpaper-blur-container) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ── Reduce motion (also applied by the lite preset) ─────────────── */
+.App.reduce-motion *,
+.App.reduce-motion *::before,
+.App.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ── Dock icon effects ───────────────────────────────────────────── */
+.App.dock-effect-pop .dock-container > :not(.dock-divider),
+.App.dock-effect-wave .dock-container > :not(.dock-divider) {
+  transition: transform 0.16s cubic-bezier(0.3, 0.7, 0.4, 1.4);
+}
+
+.App.dock-effect-pop .dock-container > :not(.dock-divider):hover,
+.App.dock-effect-wave .dock-container > :not(.dock-divider):hover {
+  transform: scale(1.1);
+}
+
+.App.dock-effect-pop .dock-container > :not(.dock-divider):active,
+.App.dock-effect-wave .dock-container > :not(.dock-divider):active {
+  transform: scale(0.92);
+}
+
+/* wave: neighbours of the hovered icon grow a little too */
+.App.dock-effect-wave .dock-container > :hover + :not(.dock-divider),
+.App.dock-effect-wave .dock-container > :not(.dock-divider):has(+ :hover) {
+  transform: scale(1.05);
+}

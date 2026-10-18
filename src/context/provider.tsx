@@ -46,6 +46,13 @@ import {
   SHOW_APP_STORE_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  QUALITY_PRESET_LOCAL_STORAGE_KEY,
+  REDUCE_MOTION_LOCAL_STORAGE_KEY,
+  DOCK_ICON_EFFECT_LOCAL_STORAGE_KEY,
+  AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY,
+  AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
+  KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+  KEYBINDS_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
@@ -78,6 +85,15 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
+import {
+  QualityPreset,
+  DockIconEffect,
+} from "../static/generalSettings";
+import {
+  Keybinds,
+  DEFAULT_KEYBINDS,
+  isValidKeybinds,
+} from "../utils/keybinds";
 import { bootSignal } from "../utils/useTabVisible";
 import { generateRandomId } from "../utils/random";
 import {
@@ -232,6 +248,20 @@ export const AppContext = createContext({
   setEnableLoadAnimation: (_: boolean) => {},
   loadAnimationType: "crt-wake-up",
   setLoadAnimationType: (_: string) => {},
+  qualityPreset: "high" as QualityPreset,
+  setQualityPreset: (_: QualityPreset) => {},
+  reduceMotion: false,
+  setReduceMotion: (_: boolean) => {},
+  dockIconEffect: "none" as DockIconEffect,
+  setDockIconEffect: (_: DockIconEffect) => {},
+  autoHideDock: false,
+  setAutoHideDock: (_: boolean) => {},
+  autoHideTabManager: false,
+  setAutoHideTabManager: (_: boolean) => {},
+  keybindsEnabled: false,
+  setKeybindsEnabled: (_: boolean) => {},
+  keybinds: DEFAULT_KEYBINDS as Keybinds,
+  setKeybinds: (_: Keybinds) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -604,6 +634,49 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
     false,
     undefined,
+    activeSpaceId,
+  );
+
+  const [qualityPreset, setQualityPreset] = useLocalStorage<QualityPreset>(
+    QUALITY_PRESET_LOCAL_STORAGE_KEY,
+    "high",
+    (val) => ["high", "balanced", "lite"].includes(val),
+    activeSpaceId,
+  );
+  const [reduceMotion, setReduceMotion] = useLocalStorage(
+    REDUCE_MOTION_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [dockIconEffect, setDockIconEffect] = useLocalStorage<DockIconEffect>(
+    DOCK_ICON_EFFECT_LOCAL_STORAGE_KEY,
+    "none",
+    (val) => ["none", "pop", "wave"].includes(val),
+    activeSpaceId,
+  );
+  const [autoHideDock, setAutoHideDock] = useLocalStorage(
+    AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [autoHideTabManager, setAutoHideTabManager] = useLocalStorage(
+    AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [keybindsEnabled, setKeybindsEnabled] = useLocalStorage(
+    KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [keybinds, setKeybinds] = useLocalStorage<Keybinds>(
+    KEYBINDS_LOCAL_STORAGE_KEY,
+    DEFAULT_KEYBINDS,
+    isValidKeybinds,
     activeSpaceId,
   );
 
@@ -1389,6 +1462,20 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      qualityPreset,
+      setQualityPreset,
+      reduceMotion,
+      setReduceMotion,
+      dockIconEffect,
+      setDockIconEffect,
+      autoHideDock,
+      setAutoHideDock,
+      autoHideTabManager,
+      setAutoHideTabManager,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,
@@ -1519,6 +1606,20 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      qualityPreset,
+      setQualityPreset,
+      reduceMotion,
+      setReduceMotion,
+      dockIconEffect,
+      setDockIconEffect,
+      autoHideDock,
+      setAutoHideDock,
+      autoHideTabManager,
+      setAutoHideTabManager,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,

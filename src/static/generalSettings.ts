@@ -49,3 +49,17 @@ export const DEFAULT_RIGHT_WIDGET_ORDER: RightWidgetId[] = [
   "search-bar",
   "quick-search",
 ];
+
+export const QUALITY_PRESET_LOCAL_STORAGE_KEY = "quality_preset";
+export const REDUCE_MOTION_LOCAL_STORAGE_KEY = "reduce_motion";
+export const DOCK_ICON_EFFECT_LOCAL_STORAGE_KEY = "dock_icon_effect";
+export const AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY = "auto_hide_dock";
+export const AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY = "auto_hide_tab_manager";
+export const KEYBINDS_ENABLED_LOCAL_STORAGE_KEY = "keybinds_enabled";
+export const KEYBINDS_LOCAL_STORAGE_KEY = "keybinds";
+
+export const qualityPresetsList = ["high", "balanced", "lite"] as const;
+export type QualityPreset = (typeof qualityPresetsList)[number];
+
+export const dockIconEffectsList = ["none", "pop", "wave"] as const;
+export type DockIconEffect = (typeof dockIconEffectsList)[number];

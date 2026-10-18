@@ -25,6 +25,7 @@ import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
+import { findActionForEvent } from "../../utils/keybinds";
 
 const LaunchpadLazy = lazy(() => import("../launchpad/Launchpad"));
 const DockFolderModalLazy = lazy(() =>
@@ -87,6 +88,10 @@ const Dock = memo(() => {
     customLaunchpadLinks,
     openSettingsToWeather,
     setOpenSettingsToWeather,
+    autoHideDock,
+    keybindsEnabled,
+    keybinds,
+    showTabManager,
   } = useContext(AppContext);
 
   const t = translation[locale] || translation.en;
@@ -203,9 +208,107 @@ const Dock = memo(() => {
     bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
   const shouldShowLaunchpad = showLaunchpad && hasLaunchpadContent;
 
+  // ── Keyboard shortcuts (see utils/keybinds.ts) ──
+  useEffect(() => {
+    if (!keybindsEnabled) return;
+
+    const handler = (e: KeyboardEvent) => {
+      if (e.repeat) return;
+      // The shortcut editor in Settings is recording a new combo
+      if (document.documentElement.hasAttribute("data-recording-keybind")) {
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      const typing =
+        !!target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable);
+      // Ctrl-only combos (copy/paste/select-all...) belong to the text field
+      if (typing && !(e.altKey || e.metaKey)) return;
+
+      const action = findActionForEvent(e, keybinds);
+      if (!action) return;
+
+      switch (action) {
+        case "launchpad":
+          if (!shouldShowLaunchpad) return;
+          setLaunchpadVisible((v) => !v);
+          setSettingsVisible(false);
+          setAppStoreVisible(false);
+          break;
+        case "appStore":
+          if (!showAppStore) return;
+          setHasOpenedAppStore(true);
+          setAppStoreVisible((v) => !v);
+          setSettingsVisible(false);
+          setLaunchpadVisible(false);
+          break;
+        case "todo":
+          if (!todoListVisbility) return;
+          groupTodosByCheckedStatus();
+          setHasOpenedTodo(true);
+          setTodoDialogOpen((v) => !v);
+          break;
+        case "stickyNote":
+          if (!showStickyNotes) return;
+          window.dispatchEvent(new CustomEvent("createStickyNote"));
+          break;
+        case "focusMode":
+          if (!showFocusMode) return;
+          setHasOpenedFocusMode(true);
+          setFocusModeVisible((v) => !v);
+          break;
+        case "freeform":
+          if (!showFreeform) return;
+          setHasOpenedFreeform(true);
+          setFreeformVisible((v) => !v);
+          break;
+        case "screenRecorder":
+          if (!showScreenRecorder) return;
+          setHasOpenedScreenRecorder(true);
+          setScreenRecorderVisible((v) => !v);
+          break;
+        case "settings":
+          setHasOpenedSettings(true);
+          setSettingsVisible((v) => !v);
+          setLaunchpadVisible(false);
+          setAppStoreVisible(false);
+          break;
+        case "tabManager":
+          if (!showTabManager) return;
+          window.dispatchEvent(new CustomEvent("toggleTabManager"));
+          break;
+      }
+      e.preventDefault();
+    };
+
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [
+    keybindsEnabled,
+    keybinds,
+    shouldShowLaunchpad,
+    showAppStore,
+    todoListVisbility,
+    groupTodosByCheckedStatus,
+    showStickyNotes,
+    showFocusMode,
+    showFreeform,
+    showScreenRecorder,
+    showTabManager,
+  ]);
+
   return (
     <>
-      <div className={`dock-scroll-container ${dockPosition}`}>
+      {autoHideDock && (
+        <div className={`dock-hover-zone ${dockPosition}`} aria-hidden="true" />
+      )}
+      <div
+        className={`dock-scroll-container ${dockPosition}${
+          autoHideDock ? " auto-hide" : ""
+        }`}
+      >
         {isOverflowButtonVisible && (
           <button
             className={

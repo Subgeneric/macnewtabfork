@@ -58,13 +58,22 @@ const App = function App() {
     interactiveWallpaperTheme,
     enableLoadAnimation,
     loadAnimationType,
+    qualityPreset,
+    reduceMotion,
+    dockIconEffect,
     activeSpaceId,
     activeSpace,
     spacesConfig,
     centerWidgetsLayout,
   } = useContext(AppContext);
 
-  const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
+  // Lite preset and reduce-motion both drop animated extras
+  const isLite = qualityPreset === "lite";
+  const motionOff = reduceMotion || isLite;
+
+  const [isWakingUp, setIsWakingUp] = useState(
+    enableLoadAnimation && !motionOff,
+  );
 
   // App is mounted: let the boot skeleton fade out once the wallpaper is ready
   useEffect(() => {
@@ -208,7 +217,10 @@ const App = function App() {
         (backgroundImage ? " has-bg" : "") +
         (wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
         (wallpaperType === "interactive" ? " has-interactive-bg" : "") +
-        (isWakingUp ? ` load-animation-${loadAnimationType}` : "")
+        (isWakingUp ? ` load-animation-${loadAnimationType}` : "") +
+        ` quality-${qualityPreset}` +
+        (motionOff ? " reduce-motion" : "") +
+        (dockIconEffect !== "none" ? ` dock-effect-${dockIconEffect}` : "")
       }
       style={bgStyle}
       lang={locale}
@@ -277,12 +289,12 @@ const App = function App() {
       {isWakingUp && loadAnimationType === "tv-static-burst" && (
         <div className="tv-static-overlay" aria-hidden="true" />
       )}
-      {wallpaperType === "dynamic" && (
+      {wallpaperType === "dynamic" && !isLite && (
         <Suspense fallback={null}>
           <DynamicWallpaper theme={dynamicWallpaperTheme} />
         </Suspense>
       )}
-      {wallpaperType === "interactive" && (
+      {wallpaperType === "interactive" && !isLite && (
         <Suspense fallback={null}>
           <InteractiveWallpaper theme={interactiveWallpaperTheme} />
         </Suspense>

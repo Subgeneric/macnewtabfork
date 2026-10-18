@@ -4,6 +4,8 @@ import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import Toggle from "../../toggle/Toggle";
 import { Select } from "../../select/Select";
+import Keybinds from "../Keybinds/Keybinds";
+import { DockIconEffect, QualityPreset } from "../../../static/generalSettings";
 
 export default function Advanced() {
   const {
@@ -11,6 +13,12 @@ export default function Advanced() {
     setEnableLoadAnimation,
     loadAnimationType,
     setLoadAnimationType,
+    qualityPreset,
+    setQualityPreset,
+    reduceMotion,
+    setReduceMotion,
+    dockIconEffect,
+    setDockIconEffect,
   } = useContext(AppContext);
 
   return (
@@ -68,6 +76,70 @@ export default function Advanced() {
           onChange={(event) => setLoadAnimationType(event.target.value)}
         />
       </div>
+
+      <div className="general__row-item">
+        <Translation value="quality_preset" />
+        <Select
+          id="quality-preset-select"
+          name="Quality preset select"
+          options={[
+            {
+              value: "high",
+              label: <Translation value="quality_preset_high" />,
+            },
+            {
+              value: "balanced",
+              label: <Translation value="quality_preset_balanced" />,
+            },
+            {
+              value: "lite",
+              label: <Translation value="quality_preset_lite" />,
+            },
+          ]}
+          value={qualityPreset}
+          onChange={(event) =>
+            setQualityPreset(event.target.value as QualityPreset)
+          }
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="reduce_motion" />
+        <Toggle
+          id="reduce-motion-toggle"
+          name="Reduce motion toggle"
+          isChecked={reduceMotion}
+          handleToggleChange={() => setReduceMotion(!reduceMotion)}
+        />
+      </div>
+
+      <div className="general__row-item">
+        <Translation value="dock_icon_effect" />
+        <Select
+          id="dock-icon-effect-select"
+          name="Dock icon effect select"
+          options={[
+            {
+              value: "none",
+              label: <Translation value="dock_icon_effect_none" />,
+            },
+            {
+              value: "pop",
+              label: <Translation value="dock_icon_effect_pop" />,
+            },
+            {
+              value: "wave",
+              label: <Translation value="dock_icon_effect_wave" />,
+            },
+          ]}
+          value={dockIconEffect}
+          onChange={(event) =>
+            setDockIconEffect(event.target.value as DockIconEffect)
+          }
+        />
+      </div>
+
+      <Keybinds />
     </div>
   );
 }

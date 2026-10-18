@@ -14,6 +14,8 @@ export default memo(function Dock() {
     handleDockSitesChange,
     dockPosition,
     setDockPosition,
+    autoHideDock,
+    setAutoHideDock,
     enableStickyNotesSync,
     setEnableStickyNotesSync,
     showAppStore,
@@ -63,6 +65,22 @@ export default memo(function Dock() {
           handleToggleChange={() =>
             setEnableStickyNotesSync(!enableStickyNotesSync)
           }
+        />
+      </div>
+
+      <div className="dock-app__toggle">
+        <div className="dock-app__toggle-info">
+          <span>
+            <h3 className="dock-app__toggle-title">
+              <Translation value="auto_hide_dock" />
+            </h3>
+          </span>
+        </div>
+        <Toggle
+          id={"auto-hide-dock-toggle"}
+          name="Auto hide dock toggle"
+          isChecked={autoHideDock}
+          handleToggleChange={() => setAutoHideDock(!autoHideDock)}
         />
       </div>
 
