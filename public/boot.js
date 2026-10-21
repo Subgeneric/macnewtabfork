@@ -24,9 +24,8 @@
   function read(key, spaceId) {
     try {
       var k = spaceId && spaceId !== "Default" ? "space_" + spaceId + "__" + key : key;
-      var v = localStorage.getItem(k);
-      // per-space value missing -> fall back to the flat key
-      return v === null && k !== key ? localStorage.getItem(key) : v;
+      // no fallback to the Default space: the app uses its own default too
+      return localStorage.getItem(k);
     } catch (e) {
       return null;
     }
@@ -48,11 +47,29 @@
         : "light";
   }
 
+  // Blurred wallpaper: only for an image wallpaper (the app's default type).
+  // The thumbnail is written by src/utils/bootCache.ts.
+  var thumb = null;
+  var wpType = read("wallpaper_type", spaceId);
+  if (!wpType || wpType === "image") {
+    try {
+      var cache = JSON.parse(localStorage.getItem("boot_cache") || "{}");
+      var entry = cache && cache[spaceId];
+      if (entry && typeof entry.thumb === "string" && entry.thumb.indexOf("data:image/") === 0) {
+        thumb = entry.thumb;
+      }
+    } catch (e) {}
+  }
+
   var root = document.documentElement;
   root.style.backgroundColor = BG[key];
   root.style.setProperty("--bs-bg", BG[key]);
   root.style.colorScheme = DARK[key] ? "dark" : "light";
   if (DARK[key]) root.setAttribute("data-boot-dark", "");
+  if (thumb) {
+    root.style.setProperty("--bs-img", 'url("' + thumb + '")');
+    root.setAttribute("data-boot-img", "");
+  }
 
   // --- skeleton dismissal -------------------------------------------------
   var rootReady = false;
@@ -67,7 +84,7 @@
     el.classList.add("boot-skeleton--out");
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
-    }, 320);
+    }, 130);
   }
   function maybeDismiss() {
     if (rootReady && wallpaperReady) {
