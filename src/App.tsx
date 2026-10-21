@@ -64,7 +64,26 @@ const App = function App() {
     centerWidgetsLayout,
   } = useContext(AppContext);
 
-  const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
+  const [isWakingUp, setIsWakingUp] = useState(
+    enableLoadAnimation &&
+      !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false),
+  );
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
+  );
+
+  // Respect OS accessibility preferences and react if they change while the tab is open.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+      if (mediaQuery.matches) setIsWakingUp(false);
+    };
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
 
   // App is mounted: let the boot skeleton fade out once the wallpaper is ready
   useEffect(() => {
@@ -206,8 +225,8 @@ const App = function App() {
       className={
         `App theme-${themeColor || theme}` +
         (backgroundImage ? " has-bg" : "") +
-        (wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
-        (wallpaperType === "interactive" ? " has-interactive-bg" : "") +
+        (!prefersReducedMotion && wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
+        (!prefersReducedMotion && wallpaperType === "interactive" ? " has-interactive-bg" : "") +
         (isWakingUp ? ` load-animation-${loadAnimationType}` : "")
       }
       style={bgStyle}
@@ -279,12 +298,12 @@ const App = function App() {
       )}
       {wallpaperType === "dynamic" && (
         <Suspense fallback={null}>
-          <DynamicWallpaper theme={dynamicWallpaperTheme} />
+          {!prefersReducedMotion && <DynamicWallpaper theme={dynamicWallpaperTheme} />}
         </Suspense>
       )}
       {wallpaperType === "interactive" && (
         <Suspense fallback={null}>
-          <InteractiveWallpaper theme={interactiveWallpaperTheme} />
+          {!prefersReducedMotion && <InteractiveWallpaper theme={interactiveWallpaperTheme} />}
         </Suspense>
       )}
       {wallpaperType !== "dynamic" &&
