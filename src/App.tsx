@@ -64,7 +64,10 @@ const App = function App() {
     centerWidgetsLayout,
   } = useContext(AppContext);
 
-  const [isWakingUp, setIsWakingUp] = useState(enableLoadAnimation);
+  const [isWakingUp, setIsWakingUp] = useState(
+    enableLoadAnimation &&
+      !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false),
+  );
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
     () =>
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
@@ -73,7 +76,10 @@ const App = function App() {
   // Respect OS accessibility preferences and react if they change while the tab is open.
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    const updatePreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+      if (mediaQuery.matches) setIsWakingUp(false);
+    };
     updatePreference();
     mediaQuery.addEventListener("change", updatePreference);
     return () => mediaQuery.removeEventListener("change", updatePreference);
