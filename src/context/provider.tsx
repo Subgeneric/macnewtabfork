@@ -95,6 +95,11 @@ import {
   isValidKeybinds,
 } from "../utils/keybinds";
 import { bootSignal } from "../utils/useTabVisible";
+import {
+  clearWallpaperThumb,
+  hasWallpaperThumb,
+  saveWallpaperThumb,
+} from "../utils/bootCache";
 import { generateRandomId } from "../utils/random";
 import {
   TODO_DOCK_VISIBLE_LOCAL_STORAGE_KEY,
@@ -1029,6 +1034,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
         activeSpaceId,
       );
       setBackgroundImage(blobURL);
+      // refresh the blurred boot-skeleton thumbnail for the new wallpaper
+      saveWallpaperThumb(activeSpaceId, blobURL);
     },
     [activeSpaceId],
   );
@@ -1040,8 +1047,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     );
     if (blobURL) {
       setBackgroundImage(blobURL);
+      // wallpaper set before the thumbnail cache existed: build it once
+      if (!hasWallpaperThumb(activeSpaceId)) {
+        saveWallpaperThumb(activeSpaceId, blobURL);
+      }
     } else {
       setBackgroundImage("");
+      clearWallpaperThumb(activeSpaceId);
     }
     bootSignal("wallpaperReady");
   }, [activeSpaceId]);
@@ -1054,6 +1066,7 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const handleDeleteWallpaper = useCallback(async () => {
     await deleteImageFromIndexedDB("customWallpaper", activeSpaceId);
     setBackgroundImage("");
+    clearWallpaperThumb(activeSpaceId);
   }, [activeSpaceId]);
 
   const handleWallpaperChange = useCallback(
