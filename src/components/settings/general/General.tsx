@@ -40,6 +40,8 @@ const General = memo(function General() {
     setSeparatePageSite,
     resetLeftWidgetsOrder,
     resetRightWidgetsOrder,
+    motionPreference,
+    setMotionPreference,
   } = useContext(AppContext);
 
   const selectedLanguageDetails = useMemo(() => {
@@ -48,6 +50,22 @@ const General = memo(function General() {
 
   return (
     <div className="general__container">
+      <div className="general__row-item">
+        <span>Reduced motion</span>
+        <Select
+          id="motion-preference-select"
+          name="Reduced motion preference"
+          options={[
+            { value: "system", label: "System" },
+            { value: "on", label: "On" },
+            { value: "off", label: "Off" },
+          ]}
+          value={motionPreference}
+          onChange={(event) =>
+            setMotionPreference(event.target.value as "system" | "on" | "off")
+          }
+        />
+      </div>
       <div className="general__row-item">
         <Translation value="show_greetings" />
         <Toggle
