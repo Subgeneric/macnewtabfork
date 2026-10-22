@@ -258,7 +258,7 @@ const ScreenRecorder = memo(
                 {isRecording ? (
                   <>
                     <div className="recording-status">
-                      <div className="recording-dot"></div>
+                      <div className="recording-dot motion-loop"></div>
                       <span className="recording-time">
                         {formatTime(recordingTime)}
                       </span>
