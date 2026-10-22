@@ -49,3 +49,6 @@ export const DEFAULT_RIGHT_WIDGET_ORDER: RightWidgetId[] = [
   "search-bar",
   "quick-search",
 ];
+export const KEYBINDS_ENABLED_LOCAL_STORAGE_KEY = "keybinds_enabled";
+export const KEYBINDS_LOCAL_STORAGE_KEY = "keybinds";
+

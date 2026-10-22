@@ -46,6 +46,8 @@ import {
   SHOW_APP_STORE_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+  KEYBINDS_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
@@ -78,6 +80,11 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
+import {
+  Keybinds,
+  DEFAULT_KEYBINDS,
+  isValidKeybinds,
+} from "../utils/keybinds";
 import { bootSignal } from "../utils/useTabVisible";
 import { generateRandomId } from "../utils/random";
 import {
@@ -232,6 +239,10 @@ export const AppContext = createContext({
   setEnableLoadAnimation: (_: boolean) => {},
   loadAnimationType: "crt-wake-up",
   setLoadAnimationType: (_: string) => {},
+  keybindsEnabled: false,
+  setKeybindsEnabled: (_: boolean) => {},
+  keybinds: DEFAULT_KEYBINDS as Keybinds,
+  setKeybinds: (_: Keybinds) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -604,6 +615,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
     false,
     undefined,
+    activeSpaceId,
+  );
+
+  const [keybindsEnabled, setKeybindsEnabled] = useLocalStorage(
+    KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [keybinds, setKeybinds] = useLocalStorage<Keybinds>(
+    KEYBINDS_LOCAL_STORAGE_KEY,
+    DEFAULT_KEYBINDS,
+    isValidKeybinds,
     activeSpaceId,
   );
 
@@ -1389,6 +1413,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,
@@ -1519,6 +1547,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setEnableLoadAnimation,
       loadAnimationType,
       setLoadAnimationType,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,

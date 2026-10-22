@@ -1,0 +1,30 @@
+.keybinds__hint {
+  padding: 4px 0 12px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--theme-clr-secondary, var(--theme-clr));
+  opacity: 0.8;
+}
+
+.keybinds__key-button {
+  min-width: 120px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+  background-color: var(--theme-button-bg);
+  color: var(--theme-clr);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.keybinds__key-button.recording {
+  border-color: var(--theme-selection-color);
+  outline: 2px solid var(--theme-selection-color);
+  outline-offset: 1px;
+}
+
+.keybinds__key-button.empty {
+  opacity: 0.6;
+}
