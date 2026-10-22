@@ -395,7 +395,7 @@ const FocusMode: React.FC<{
           <svg className="timer-circle-svg">
             <circle className="timer-circle-bg" cx="50%" cy="50%" r="70" />
             <circle
-              className="timer-circle-progress"
+              className="timer-circle-progress motion-feedback"
               cx="50%"
               cy="50%"
               r="70"
