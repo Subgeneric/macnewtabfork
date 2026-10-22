@@ -45,6 +45,7 @@ import {
   SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
   SHOW_APP_STORE_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
@@ -235,6 +236,8 @@ export const AppContext = createContext({
   setUseSearchDropdown: (_: boolean) => {},
   enableLoadAnimation: false,
   setEnableLoadAnimation: (_: boolean) => {},
+  motionPreference: "system" as "system" | "on" | "off",
+  setMotionPreference: (_: "system" | "on" | "off") => {},
   loadAnimationType: "crt-wake-up",
   setLoadAnimationType: (_: string) => {},
   showWeather: true,
@@ -610,6 +613,13 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     false,
     undefined,
     activeSpaceId,
+  );
+
+  // Global preference: old installations inherit the OS setting by default.
+  const [motionPreference, setMotionPreference] = useLocalStorage<"system" | "on" | "off">(
+    MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
+    "system",
+    (val) => val === "system" || val === "on" || val === "off",
   );
 
   const [centerWidgetsLayout, setCenterWidgetsLayout] =
@@ -1400,6 +1410,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
+      motionPreference,
+      setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
       centerWidgetsLayout,
@@ -1530,6 +1542,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
+      motionPreference,
+      setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
       centerWidgetsLayout,
