@@ -58,32 +58,41 @@ const App = function App() {
     interactiveWallpaperTheme,
     enableLoadAnimation,
     loadAnimationType,
+    motionPreference,
     activeSpaceId,
     activeSpace,
     spacesConfig,
     centerWidgetsLayout,
   } = useContext(AppContext);
 
-  const [isWakingUp, setIsWakingUp] = useState(
-    enableLoadAnimation &&
-      !(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false),
+  const [systemPrefersReducedMotion, setSystemPrefersReducedMotion] = useState(
+    () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
   );
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    () =>
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
+  const prefersReducedMotion =
+    motionPreference === "on" ||
+    (motionPreference === "system" && systemPrefersReducedMotion);
+  const [isWakingUp, setIsWakingUp] = useState(
+    () => enableLoadAnimation && !prefersReducedMotion,
   );
 
-  // Respect OS accessibility preferences and react if they change while the tab is open.
+  // Follow OS changes only in System mode; On and Off are explicit overrides.
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => {
-      setPrefersReducedMotion(mediaQuery.matches);
-      if (mediaQuery.matches) setIsWakingUp(false);
-    };
+    const updatePreference = () => setSystemPrefersReducedMotion(mediaQuery.matches);
     updatePreference();
     mediaQuery.addEventListener("change", updatePreference);
     return () => mediaQuery.removeEventListener("change", updatePreference);
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) setIsWakingUp(false);
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("motion-reduced", prefersReducedMotion);
+    return () => root.classList.remove("motion-reduced");
+  }, [prefersReducedMotion]);
 
   // App is mounted: let the boot skeleton fade out once the wallpaper is ready
   useEffect(() => {
