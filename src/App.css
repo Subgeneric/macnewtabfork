@@ -1148,15 +1148,29 @@ html.tab-hidden *::after {
 }
 
 
-/* Accessibility: minimize decorative motion when the OS requests reduced motion. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-  }
+/* Accessibility: follow the effective app preference, including the in-app override. */
+html.motion-reduced *,
+html.motion-reduced *::before,
+html.motion-reduced *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+}
+
+/* Essential looping status feedback remains visible in reduced-motion mode. */
+html.motion-reduced .motion-loop {
+  animation-duration: var(--motion-loop-duration, 1.5s) !important;
+  animation-iteration-count: infinite !important;
+}
+
+/* Keep the focus timer progress ring synchronized with its countdown. */
+html.motion-reduced .motion-feedback {
+  transition-duration: 1s !important;
+  transition-delay: 0ms !important;
+}
+
+.motion-loop {
+  --motion-loop-duration: 1.5s;
 }
