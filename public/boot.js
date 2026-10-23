@@ -105,6 +105,19 @@
       maybeDismiss();
     },
   };
-  // safety net: never leave the skeleton up if something stalls
-  setTimeout(dismiss, 2500);
+  // Safety net: never leave the skeleton up if something stalls. The app only
+  // mounts once the tab is first visible (see useHasBeenVisible), so the timer
+  // starts then too; otherwise a background tab would fire it before mounting.
+  function armSafetyNet() {
+    setTimeout(dismiss, 2500);
+  }
+  if (document.visibilityState === "visible") {
+    armSafetyNet();
+  } else {
+    document.addEventListener("visibilitychange", function onVisible() {
+      if (document.visibilityState !== "visible") return;
+      document.removeEventListener("visibilitychange", onVisible);
+      armSafetyNet();
+    });
+  }
 })();
