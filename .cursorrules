@@ -38,7 +38,7 @@ Do NOT hardcode colors. The extension has dynamic theming (Light/Dark/Custom). A
 **DO NOT use hardcoded English strings in JSX.**
 1. Open `src/locale/languages.ts`.
 2. Add your translation keys to the `enTranslation` object at the top.
-3. You **MUST** add the exact same keys translated into all 20 supported languages below it (kn, cs, tr, vi, uz, zh, hi, it, bn, pt, fr, ru, es, ja, ko, id, mr, pl, de). Ensure the order and structure match exactly.
+3. You **MUST** add the exact same keys, translated, to each of the 19 other language files in `src/locale/lang/` (`kn.ts`, `cs.ts`, `tr.ts`, `vi.ts`, `uz.ts`, `zh.ts`, `hi.ts`, `it.ts`, `bn.ts`, `pt.ts`, `fr.ts`, `ru.ts`, `es.ts`, `ja.ts`, `ko.ts`, `id.ts`, `mr.ts`, `pl.ts`, `de.ts`). Ensure the order and structure match `enTranslation` exactly. Only English is bundled up front; the other languages load on demand through `src/locale/loadLocale.ts`. A brand-new language needs a file in `src/locale/lang/`, a loader entry in `loadLocale.ts`, and entries in `languageOptions` and `languageLocaleMap` in `languages.ts`.
 4. Usage in components: 
    - **For JSX Elements**: Always use the `<Translation>` component. Example: `<Translation value="your_new_key" />`
    - **For String Values** (e.g., placeholders, aria-labels, titles): Access the translation object from Context. Example: `const { translation, locale } = useContext(AppContext); const t = translation[locale];` -> `t.your_new_key`.
