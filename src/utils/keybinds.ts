@@ -68,8 +68,45 @@ export function formatCombo(combo: string | undefined): string {
     .join(" + ");
 }
 
+const VALID_MODIFIERS = new Set(["Ctrl", "Alt", "Shift", "Meta"]);
+const KEY_CODE_PATTERN = /^[A-Za-z][A-Za-z0-9]*$/;
+
+/** Reject malformed persisted shortcuts before they reach the event handler or UI. */
+function isValidCombo(value: unknown): value is string {
+  if (typeof value !== "string" || !value) return false;
+
+  const parts = value.split("+");
+  if (parts.length < 2) return false;
+
+  const keyCode = parts[parts.length - 1];
+  if (
+    !KEY_CODE_PATTERN.test(keyCode) ||
+    VALID_MODIFIERS.has(keyCode) ||
+    MODIFIER_CODES.has(keyCode)
+  ) {
+    return false;
+  }
+
+  const modifiers = parts.slice(0, -1);
+  if (
+    modifiers.some((modifier) => !VALID_MODIFIERS.has(modifier)) ||
+    new Set(modifiers).size !== modifiers.length ||
+    !modifiers.some((modifier) => modifier === "Ctrl" || modifier === "Alt" || modifier === "Meta")
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
 export function isValidKeybinds(val: unknown): val is Keybinds {
-  return !!val && typeof val === "object" && !Array.isArray(val);
+  if (!val || typeof val !== "object" || Array.isArray(val)) return false;
+
+  const entries = Object.entries(val);
+  return entries.every(
+    ([action, combo]) =>
+      KEYBIND_ACTIONS.includes(action as KeybindAction) && isValidCombo(combo),
+  );
 }
 
 export function findActionForEvent(
