@@ -273,6 +273,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Catatan Tempel Baru",
   keybind_screen_recorder: "Perekam Layar",
   keybind_open_settings: "Buka pengaturan",
+  auto_hide_dock: "Sembunyikan Dock Otomatis",
+  auto_hide_tab_manager: "Sembunyikan Pengelola Tab Otomatis",
   animation_type: "Jenis Animasi",
   support_description:
     "Mac New Tab gratis dan akan selalu begitu. Jika Anda menyukainya, traktir secangkir kopi akan sangat membantu dalam mendukung pembaruan dan fitur baru di masa mendatang!",

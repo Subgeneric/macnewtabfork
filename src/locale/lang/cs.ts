@@ -271,6 +271,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Nová samolepicí poznámka",
   keybind_screen_recorder: "Záznam obrazovky",
   keybind_open_settings: "Otevřít nastavení",
+  auto_hide_dock: "Automaticky skrýt dok",
+  auto_hide_tab_manager: "Automaticky skrýt správce karet",
   animation_type: "Typ animace",
   support_description:
     "Mac New Tab je zdarma a vždy bude. Pokud ho rádi používáte, koupí malé kávy velmi podpoříte budoucí aktualizace a vývoj nových funkcí!",

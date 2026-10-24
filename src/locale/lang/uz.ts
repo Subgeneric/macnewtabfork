@@ -277,6 +277,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Yangi yopishqoq qayd",
   keybind_screen_recorder: "Ekranni yozib olish",
   keybind_open_settings: "Sozlamalarni ochish",
+  auto_hide_dock: "Dockni avtomatik yashirish",
+  auto_hide_tab_manager: "Yorliq menejerini avtomatik yashirish",
   animation_type: "Animatsiya turi",
   support_description:
     "Mac New Tab bepul va har doim shunday bo'ladi. Agar u sizga yoqsa, kichik bir qahva bilan siylash kelajakdagi yangilanishlar va yangi xususiyatlarni qo'llab-quvvatlashga juda katta yordam beradi!",

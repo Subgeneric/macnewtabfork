@@ -50,5 +50,7 @@ export const DEFAULT_RIGHT_WIDGET_ORDER: RightWidgetId[] = [
   "search-bar",
   "quick-search",
 ];
+export const AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY = "auto_hide_dock";
+export const AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY = "auto_hide_tab_manager";
 export const KEYBINDS_ENABLED_LOCAL_STORAGE_KEY = "keybinds_enabled";
 export const KEYBINDS_LOCAL_STORAGE_KEY = "keybinds";

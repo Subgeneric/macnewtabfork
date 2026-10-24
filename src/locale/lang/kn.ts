@@ -268,6 +268,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "ಹೊಸ ಸ್ಟಿಕ್ಕಿ ನೋಟ್",
   keybind_screen_recorder: "ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡರ್",
   keybind_open_settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
+  auto_hide_dock: "ಡಾಕ್ ಸ್ವಯಂ ಮರೆಮಾಡಿ",
+  auto_hide_tab_manager: "ಟ್ಯಾಬ್ ಮ್ಯಾನೇಜರ್ ಸ್ವಯಂ ಮರೆಮಾಡಿ",
   animation_type: "ಅನಿಮೇಷನ್ ಪ್ರಕಾರ",
   support_description:
     "ಮ್ಯಾಕ್ ನ್ಯೂ ಟ್ಯಾಬ್ ಉಚಿತವಾಗಿದೆ ಮತ್ತು ಯಾವಾಗಲೂ ಇರಲಿದೆ. ನಿಮಗೆ ಇದು ಇಷ್ಟವಾದರೆ, ಒಂದು ಚಿಕ್ಕ ಕಾಫಿ ಕೊಡಿಸುವ ಮೂಲಕ ಬೆಂಬಲಿಸಿದರೆ ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ಗಳು ಹಾಗೂ ಹೊಸ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತರಲು ತುಂಬಾ ಸಹಾಯವಾಗುತ್ತದೆ!",

@@ -273,6 +273,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "নতুন স্টিকি নোট",
   keybind_screen_recorder: "স্ক্রিন রেকর্ডার",
   keybind_open_settings: "সেটিংস খুলুন",
+  auto_hide_dock: "ডক স্বয়ংক্রিয়ভাবে লুকান",
+  auto_hide_tab_manager: "ট্যাব ম্যানেজার স্বয়ংক্রিয়ভাবে লুকান",
   animation_type: "অ্যানিমেশনের ধরন",
   support_description:
     "ম্যাক নিউ ট্যাব বিনামূল্যে আছে এবং সর্বদা থাকবে। আপনি যদি এটি ব্যবহার করতে পছন্দ করেন, তবে একটি ছোট কফি উপহার দিলে এটি ভবিষ্যতের আপডেট এবং নতুন বৈশিষ্ট্যগুলি আনতে অনেক সাহায্য করবে!",

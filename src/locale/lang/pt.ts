@@ -274,6 +274,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Nova nota adesiva",
   keybind_screen_recorder: "Gravador de tela",
   keybind_open_settings: "Abrir configurações",
+  auto_hide_dock: "Ocultar Dock automaticamente",
+  auto_hide_tab_manager: "Ocultar Gerenciador de abas automaticamente",
   animation_type: "Tipo de animação",
   support_description:
     "O Mac New Tab é gratuito e sempre será. Se você gosta de usá-lo, pagar um cafezinho ajuda muito a apoiar futuras atualizações e novos recursos!",

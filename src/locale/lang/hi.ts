@@ -274,6 +274,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "नया स्टिकी नोट",
   keybind_screen_recorder: "स्क्रीन रिकॉर्डर",
   keybind_open_settings: "सेटिंग्स खोलें",
+  auto_hide_dock: "डॉक अपने आप छिपाएँ",
+  auto_hide_tab_manager: "टैब मैनेजर अपने आप छिपाएँ",
   animation_type: "एनिमेशन प्रकार",
   support_description:
     "मैक न्यू टैब हमेशा मुफ़्त रहेगा। अगर आपको यह पसंद है, तो एक छोटी सी कॉफ़ी पिलाकर आप भविष्य के अपडेट और नए फ़ीचर्स लाने में हमारी बहुत मदद कर सकते हैं!",

@@ -274,6 +274,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Ghi chú dán mới",
   keybind_screen_recorder: "Trình ghi màn hình",
   keybind_open_settings: "Mở cài đặt",
+  auto_hide_dock: "Tự động ẩn Dock",
+  auto_hide_tab_manager: "Tự động ẩn Trình quản lý tab",
   animation_type: "Loại hoạt ảnh",
   support_description:
     "Mac New Tab miễn phí và sẽ luôn như vậy. Nếu bạn thích, việc mời một ly cà phê nhỏ sẽ giúp ích rất nhiều cho việc hỗ trợ các bản cập nhật và tính năng mới trong tương lai!",

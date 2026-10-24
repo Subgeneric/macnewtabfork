@@ -299,6 +299,8 @@ const enTranslation = {
   keybind_new_sticky_note: "New Sticky Note",
   keybind_screen_recorder: "Screen Recorder",
   keybind_open_settings: "Open Settings",
+  auto_hide_dock: "Auto-hide Dock",
+  auto_hide_tab_manager: "Auto-hide Tab Manager",
   animation_type: "Animation Type",
   support_description:
     "Mac New Tab is free and always will be. If you enjoy using it, a small coffee goes a long way in keeping updates and new features alive!",

@@ -88,6 +88,7 @@ const Dock = memo(() => {
     customLaunchpadLinks,
     openSettingsToWeather,
     setOpenSettingsToWeather,
+    autoHideDock,
     keybindsEnabled,
     keybinds,
     showTabManager,
@@ -300,7 +301,14 @@ const Dock = memo(() => {
 
   return (
     <>
-      <div className={`dock-scroll-container ${dockPosition}`}>
+      {autoHideDock && (
+        <div className={`dock-hover-zone ${dockPosition}`} aria-hidden="true" />
+      )}
+      <div
+        className={`dock-scroll-container ${dockPosition}${
+          autoHideDock ? " auto-hide" : ""
+        }`}
+      >
         {isOverflowButtonVisible && (
           <button
             className={

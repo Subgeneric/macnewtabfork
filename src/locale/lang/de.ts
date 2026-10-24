@@ -278,6 +278,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Neue Haftnotiz",
   keybind_screen_recorder: "Bildschirmrekorder",
   keybind_open_settings: "Einstellungen öffnen",
+  auto_hide_dock: "Dock automatisch ausblenden",
+  auto_hide_tab_manager: "Tab-Manager automatisch ausblenden",
   animation_type: "Animationstyp",
   support_description:
     "Mac New Tab ist kostenlos und wird es immer bleiben. Wenn es Ihnen gefällt, hilft eine kleine Kaffee-Spende enorm dabei, zukünftige Updates und neue Funktionen zu unterstützen!",

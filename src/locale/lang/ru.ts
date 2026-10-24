@@ -276,6 +276,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Новая заметка",
   keybind_screen_recorder: "Запись экрана",
   keybind_open_settings: "Открыть настройки",
+  auto_hide_dock: "Автоскрытие дока",
+  auto_hide_tab_manager: "Автоскрытие менеджера вкладок",
   animation_type: "Тип анимации",
   support_description:
     "Mac New Tab бесплатен и всегда будет бесплатным. Если вам нравится расширение, чашка кофе очень поможет поддержке проекта и разработке новых функций!",

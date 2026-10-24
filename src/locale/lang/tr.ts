@@ -274,6 +274,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Yeni Yapışkan Not",
   keybind_screen_recorder: "Ekran Kaydedici",
   keybind_open_settings: "Ayarları aç",
+  auto_hide_dock: "Dock'u Otomatik Gizle",
+  auto_hide_tab_manager: "Sekme Yöneticisini Otomatik Gizle",
   animation_type: "Animasyon Türü",
   support_description:
     "Mac New Tab ücretsizdir ve her zaman öyle kalacaktır. Kullanmaktan keyif alıyorsanız, küçük bir kahve ısmarlamak gelecekteki güncellemeleri ve yeni özellikleri desteklemeye çok yardımcı olur!",

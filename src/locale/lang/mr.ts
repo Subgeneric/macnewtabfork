@@ -272,6 +272,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "नवीन स्टिकी नोट",
   keybind_screen_recorder: "स्क्रीन रेकॉर्डर",
   keybind_open_settings: "सेटिंग्ज उघडा",
+  auto_hide_dock: "डॉक आपोआप लपवा",
+  auto_hide_tab_manager: "टॅब मॅनेजर आपोआप लपवा",
   animation_type: "ॲनिमेशन प्रकार",
   support_description:
     "मॅक न्यू टॅब विनामूल्य आहे आणि नेहमीच असेल. जर तुम्हाला हे आवडले असेल, तर एक छोटी कॉफी भेट दिल्यास भविष्यातील अपडेट्स आणि नवीन फीचर्स विकसित करण्यास खूप मदत होईल!",

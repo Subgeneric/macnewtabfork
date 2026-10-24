@@ -47,6 +47,8 @@ import {
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY,
+  AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
   KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
   KEYBINDS_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
@@ -249,6 +251,10 @@ export const AppContext = createContext({
   setMotionPreference: (_: "system" | "on" | "off") => {},
   loadAnimationType: "crt-wake-up",
   setLoadAnimationType: (_: string) => {},
+  autoHideDock: false,
+  setAutoHideDock: (_: boolean) => {},
+  autoHideTabManager: false,
+  setAutoHideTabManager: (_: boolean) => {},
   keybindsEnabled: false,
   setKeybindsEnabled: (_: boolean) => {},
   keybinds: DEFAULT_KEYBINDS as Keybinds,
@@ -645,6 +651,19 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
     "system",
     (val) => val === "system" || val === "on" || val === "off",
+  );
+
+  const [autoHideDock, setAutoHideDock] = useLocalStorage(
+    AUTO_HIDE_DOCK_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
+  );
+  const [autoHideTabManager, setAutoHideTabManager] = useLocalStorage(
+    AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
+    false,
+    undefined,
+    activeSpaceId,
   );
 
   // Keyboard shortcuts are global: they must not change when a time-based
@@ -1453,6 +1472,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
+      autoHideDock,
+      setAutoHideDock,
+      autoHideTabManager,
+      setAutoHideTabManager,
       keybindsEnabled,
       setKeybindsEnabled,
       keybinds,
@@ -1589,6 +1612,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
+      autoHideDock,
+      setAutoHideDock,
+      autoHideTabManager,
+      setAutoHideTabManager,
       keybindsEnabled,
       setKeybindsEnabled,
       keybinds,

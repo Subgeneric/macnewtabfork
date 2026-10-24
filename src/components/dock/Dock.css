@@ -212,3 +212,54 @@
   width: 100%;
   height: 100%;
 }
+
+/* ── Auto-hide dock: slides off-screen, revealed from the screen edge ── */
+.dock-hover-zone {
+  position: fixed;
+  z-index: 5;
+}
+
+.dock-hover-zone.bottom {
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  height: 10px;
+}
+
+.dock-hover-zone.left,
+.dock-hover-zone.right {
+  top: 20%;
+  bottom: 20%;
+  width: 10px;
+}
+
+.dock-hover-zone.left {
+  left: 0;
+}
+
+.dock-hover-zone.right {
+  right: 0;
+}
+
+.dock-scroll-container.auto-hide {
+  transition: transform 0.25s cubic-bezier(0.3, 0.61, 0.355, 1) 0.5s;
+}
+
+.dock-scroll-container.auto-hide.bottom {
+  transform: translateY(calc(100% + 40px));
+}
+
+.dock-scroll-container.auto-hide.left {
+  transform: translateX(calc(-100% - 40px));
+}
+
+.dock-scroll-container.auto-hide.right {
+  transform: translateX(calc(100% + 40px));
+}
+
+.dock-hover-zone:hover + .dock-scroll-container.auto-hide,
+.dock-scroll-container.auto-hide:hover,
+.dock-scroll-container.auto-hide:focus-within {
+  transform: none;
+  transition-delay: 0s;
+}

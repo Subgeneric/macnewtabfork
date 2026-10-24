@@ -275,6 +275,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "Nowa karteczka",
   keybind_screen_recorder: "Rejestrator ekranu",
   keybind_open_settings: "Otwórz ustawienia",
+  auto_hide_dock: "Automatycznie ukrywaj dock",
+  auto_hide_tab_manager: "Automatycznie ukrywaj menedżera kart",
   animation_type: "Typ animacji",
   support_description:
     "Mac New Tab jest darmowy i zawsze taki będzie. Jeśli lubisz z niego korzystać, postawienie mi małej kawy bardzo pomoże w pracy nad przyszłymi aktualizacjami i nowymi funkcjami!",

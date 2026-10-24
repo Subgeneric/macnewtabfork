@@ -271,6 +271,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "새 스티커 메모",
   keybind_screen_recorder: "화면 녹화",
   keybind_open_settings: "설정 열기",
+  auto_hide_dock: "Dock 자동 숨기기",
+  auto_hide_tab_manager: "탭 관리자 자동 숨기기",
   animation_type: "애니메이션 유형",
   support_description:
     "Mac 신규 탭은 항상 무료로 제공됩니다. 유용하게 사용하고 계신다면, 작은 커피 한 잔의 후원이 향후 업데이트와 새로운 기능 개발에 큰 힘이 됩니다!",

@@ -274,6 +274,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "新しい付箋",
   keybind_screen_recorder: "画面レコーダー",
   keybind_open_settings: "設定を開く",
+  auto_hide_dock: "Dockを自動的に隠す",
+  auto_hide_tab_manager: "タブマネージャーを自動的に隠す",
   animation_type: "アニメーションの種類",
   support_description:
     "Mac New Tab はずっと無料でご利用いただけます。もし気に入っていただけたなら、コーヒー1杯分のご支援が、今後のアップデートや新機能開発の大きな支えになります！",

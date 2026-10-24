@@ -43,7 +43,7 @@ const TabManager = memo(() => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [tabList, setTabList] = useState<chrome.tabs.Tab[]>([]);
-  const { locale } = useContext(AppContext);
+  const { locale, autoHideTabManager } = useContext(AppContext);
 
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -255,7 +255,11 @@ const TabManager = memo(() => {
 
   return (
     <aside
-      className={"tab-manager__overlay" + (open ? " open" : "")}
+      className={
+        "tab-manager__overlay" +
+        (open ? " open" : "") +
+        (autoHideTabManager ? " auto-hide" : "")
+      }
       onClick={() => setOpen(false)}
     >
       <section
@@ -384,6 +388,9 @@ const TabManager = memo(() => {
           )}
         </div>
       </section>
+      {autoHideTabManager && (
+        <div className="tab-manager__hover-zone" aria-hidden="true" />
+      )}
       <button className="tab-manager__anchor" onClick={handleOpen}>
         <div className="tab-manager__anchor-bar"></div>
       </button>

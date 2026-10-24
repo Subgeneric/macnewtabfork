@@ -266,6 +266,8 @@ const strings: Record<string, string> = {
   keybind_new_sticky_note: "新建便签",
   keybind_screen_recorder: "屏幕录制",
   keybind_open_settings: "打开设置",
+  auto_hide_dock: "自动隐藏程序坞",
+  auto_hide_tab_manager: "自动隐藏标签页管理器",
   animation_type: "动画类型",
   support_description:
     "Mac New Tab 会一直免费。如果您喜欢使用它，请我喝杯咖啡将极大地帮助支持未来的更新和新功能！",
