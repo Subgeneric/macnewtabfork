@@ -1140,14 +1140,6 @@ body:has(.App.theme-dark) .active-space-capsule {
   text-overflow: ellipsis;
 }
 
-/* Pause CSS animations while the tab is in the background */
-html.tab-hidden *,
-html.tab-hidden *::before,
-html.tab-hidden *::after {
-  animation-play-state: paused !important;
-}
-
-
 /* Accessibility: follow the effective app preference, including the in-app override. */
 html.motion-reduced *,
 html.motion-reduced *::before,
