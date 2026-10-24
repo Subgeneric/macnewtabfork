@@ -215,7 +215,8 @@ const Dock = memo(() => {
     if (!keybindsEnabled) return;
 
     const handler = (e: KeyboardEvent) => {
-      if (e.repeat) return;
+      // Never fire shortcuts while an IME is composing text.
+      if (e.isComposing || e.repeat) return;
       // The shortcut editor in Settings is recording a new combo
       if (document.documentElement.hasAttribute("data-recording-keybind")) {
         return;
@@ -225,6 +226,7 @@ const Dock = memo(() => {
         !!target &&
         (target.tagName === "INPUT" ||
           target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
           target.isContentEditable);
       // Editing shortcuts and text-producing keystrokes belong to the field
       if (typing && shouldLeaveToTextField(e)) return;
