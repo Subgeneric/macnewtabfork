@@ -228,57 +228,75 @@ const Dock = memo(() => {
           target.isContentEditable);
       // Editing shortcuts and text-producing keystrokes belong to the field
       if (typing && shouldLeaveToTextField(e)) return;
+      // Don't act behind a blocking dialog (a confirm dialog or a dock folder)
+      if (openedFolder || document.querySelector('[aria-modal="true"]')) {
+        return;
+      }
 
       const action = findActionForEvent(e, keybinds);
       if (!action) return;
 
+      // Launchpad, App Store and Settings are exclusive panels. Every shortcut
+      // closes them, except the one it toggles, so its result is never hidden
+      // behind a panel that was already open.
+      const closeOtherPanels = (
+        keep?: "launchpad" | "appStore" | "settings",
+      ) => {
+        if (keep !== "launchpad") setLaunchpadVisible(false);
+        if (keep !== "appStore") setAppStoreVisible(false);
+        if (keep !== "settings") setSettingsVisible(false);
+      };
+
       switch (action) {
         case "launchpad":
           if (!shouldShowLaunchpad) return;
+          closeOtherPanels("launchpad");
           setLaunchpadVisible((v) => !v);
-          setSettingsVisible(false);
-          setAppStoreVisible(false);
           break;
         case "appStore":
           if (!showAppStore) return;
+          closeOtherPanels("appStore");
           setHasOpenedAppStore(true);
           setAppStoreVisible((v) => !v);
-          setSettingsVisible(false);
-          setLaunchpadVisible(false);
           break;
         case "todo":
           if (!todoListVisbility) return;
+          closeOtherPanels();
           groupTodosByCheckedStatus();
           setHasOpenedTodo(true);
           setTodoDialogOpen((v) => !v);
           break;
         case "stickyNote":
           if (!showStickyNotes) return;
+          closeOtherPanels();
           window.dispatchEvent(new CustomEvent("createStickyNote"));
           break;
         case "focusMode":
           if (!showFocusMode) return;
+          closeOtherPanels();
           setHasOpenedFocusMode(true);
           setFocusModeVisible((v) => !v);
           break;
         case "freeform":
           if (!showFreeform) return;
+          closeOtherPanels();
           setHasOpenedFreeform(true);
           setFreeformVisible((v) => !v);
           break;
         case "screenRecorder":
           if (!showScreenRecorder) return;
+          closeOtherPanels();
           setHasOpenedScreenRecorder(true);
           setScreenRecorderVisible((v) => !v);
           break;
         case "settings":
+          closeOtherPanels("settings");
           setHasOpenedSettings(true);
           setSettingsVisible((v) => !v);
-          setLaunchpadVisible(false);
-          setAppStoreVisible(false);
           break;
         case "tabManager":
           if (!showTabManager) return;
+          closeOtherPanels();
           window.dispatchEvent(new CustomEvent("toggleTabManager"));
           break;
       }
@@ -299,6 +317,7 @@ const Dock = memo(() => {
     showFreeform,
     showScreenRecorder,
     showTabManager,
+    openedFolder,
   ]);
 
   return (
