@@ -265,6 +265,14 @@ const strings: Record<string, string> = {
   motion_system: "সিস্টেম",
   motion_on: "চালু",
   motion_off: "বন্ধ",
+  enable_keybinds: "কীবোর্ড শর্টকাট চালু করুন",
+  keybinds_hint:
+    "শর্টকাটের জন্য Ctrl, Alt বা Cmd প্রয়োজন। পরিবর্তন করতে শর্টকাটে ক্লিক করুন, মুছতে Backspace চাপুন।",
+  keybind_press_keys: "কী চাপুন…",
+  keybind_not_set: "সেট করা নেই",
+  keybind_new_sticky_note: "নতুন স্টিকি নোট",
+  keybind_screen_recorder: "স্ক্রিন রেকর্ডার",
+  keybind_open_settings: "সেটিংস খুলুন",
   animation_type: "অ্যানিমেশনের ধরন",
   support_description:
     "ম্যাক নিউ ট্যাব বিনামূল্যে আছে এবং সর্বদা থাকবে। আপনি যদি এটি ব্যবহার করতে পছন্দ করেন, তবে একটি ছোট কফি উপহার দিলে এটি ভবিষ্যতের আপডেট এবং নতুন বৈশিষ্ট্যগুলি আনতে অনেক সাহায্য করবে!",

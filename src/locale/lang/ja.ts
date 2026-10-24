@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "システム",
   motion_on: "オン",
   motion_off: "オフ",
+  enable_keybinds: "キーボードショートカットを有効にする",
+  keybinds_hint:
+    "ショートカットには Ctrl、Alt、または Cmd が必要です。変更するにはショートカットをクリックし、Backspace で削除します。",
+  keybind_press_keys: "キーを押してください…",
+  keybind_not_set: "未設定",
+  keybind_new_sticky_note: "新しい付箋",
+  keybind_screen_recorder: "画面レコーダー",
+  keybind_open_settings: "設定を開く",
   animation_type: "アニメーションの種類",
   support_description:
     "Mac New Tab はずっと無料でご利用いただけます。もし気に入っていただけたなら、コーヒー1杯分のご支援が、今後のアップデートや新機能開発の大きな支えになります！",

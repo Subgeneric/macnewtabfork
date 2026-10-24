@@ -268,6 +268,14 @@ const strings: Record<string, string> = {
   motion_system: "Système",
   motion_on: "Activé",
   motion_off: "Désactivé",
+  enable_keybinds: "Activer les raccourcis clavier",
+  keybinds_hint:
+    "Les raccourcis nécessitent Ctrl, Alt ou Cmd. Cliquez sur un raccourci pour le modifier, puis appuyez sur Retour arrière pour l'effacer.",
+  keybind_press_keys: "Appuyez sur les touches…",
+  keybind_not_set: "Non défini",
+  keybind_new_sticky_note: "Nouvelle note autocollante",
+  keybind_screen_recorder: "Enregistreur d'écran",
+  keybind_open_settings: "Ouvrir les paramètres",
   animation_type: "Type d'animation",
   support_description:
     "Mac New Tab est gratuit et le restera toujours. Si vous l'appréciez, m'offrir un petit café m'aidera énormément à développer de futures mises à jour et de nouvelles fonctionnalités !",

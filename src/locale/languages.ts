@@ -291,6 +291,14 @@ const enTranslation = {
   motion_system: "System",
   motion_on: "On",
   motion_off: "Off",
+  enable_keybinds: "Enable Keyboard Shortcuts",
+  keybinds_hint:
+    "Shortcuts need Ctrl, Alt or Cmd. Click a shortcut to change it, then press Backspace to clear it.",
+  keybind_press_keys: "Press keys…",
+  keybind_not_set: "Not set",
+  keybind_new_sticky_note: "New Sticky Note",
+  keybind_screen_recorder: "Screen Recorder",
+  keybind_open_settings: "Open Settings",
   animation_type: "Animation Type",
   support_description:
     "Mac New Tab is free and always will be. If you enjoy using it, a small coffee goes a long way in keeping updates and new features alive!",

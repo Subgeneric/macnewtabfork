@@ -263,6 +263,14 @@ const strings: Record<string, string> = {
   motion_system: "Systém",
   motion_on: "Zapnuto",
   motion_off: "Vypnuto",
+  enable_keybinds: "Povolit klávesové zkratky",
+  keybinds_hint:
+    "Zkratky vyžadují Ctrl, Alt nebo Cmd. Kliknutím na zkratku ji změníte, klávesou Backspace ji smažete.",
+  keybind_press_keys: "Stiskněte klávesy…",
+  keybind_not_set: "Nenastaveno",
+  keybind_new_sticky_note: "Nová samolepicí poznámka",
+  keybind_screen_recorder: "Záznam obrazovky",
+  keybind_open_settings: "Otevřít nastavení",
   animation_type: "Typ animace",
   support_description:
     "Mac New Tab je zdarma a vždy bude. Pokud ho rádi používáte, koupí malé kávy velmi podpoříte budoucí aktualizace a vývoj nových funkcí!",
