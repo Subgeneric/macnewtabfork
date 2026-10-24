@@ -25,7 +25,10 @@ import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
-import { findActionForEvent } from "../../utils/keybinds";
+import {
+  findActionForEvent,
+  shouldLeaveToTextField,
+} from "../../utils/keybinds";
 
 const LaunchpadLazy = lazy(() => import("../launchpad/Launchpad"));
 const DockFolderModalLazy = lazy(() =>
@@ -223,8 +226,8 @@ const Dock = memo(() => {
         (target.tagName === "INPUT" ||
           target.tagName === "TEXTAREA" ||
           target.isContentEditable);
-      // Ctrl-only combos (copy/paste/select-all...) belong to the text field
-      if (typing && !(e.altKey || e.metaKey)) return;
+      // Editing shortcuts and text-producing keystrokes belong to the field
+      if (typing && shouldLeaveToTextField(e)) return;
 
       const action = findActionForEvent(e, keybinds);
       if (!action) return;
