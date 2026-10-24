@@ -6,9 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import AppProvider from "./context/provider";
 
 import ErrorBoundary from "./ErrorBoundary";
-import { trackTabHidden, useHasBeenVisible } from "./utils/useTabVisible";
-
-trackTabHidden();
+import { useHasBeenVisible } from "./utils/useTabVisible";
 
 // Don't mount (or load) anything until this tab is actually shown.
 const RenderWhenVisible = () => {

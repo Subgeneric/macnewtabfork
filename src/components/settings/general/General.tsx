@@ -12,6 +12,12 @@ const clockStyleOptions = [
   { label: <Translation value="digital_clock" />, value: "digital" },
 ];
 
+const motionPreferenceOptions = [
+  { label: <Translation value="motion_system" />, value: "system" },
+  { label: <Translation value="motion_on" />, value: "on" },
+  { label: <Translation value="motion_off" />, value: "off" },
+];
+
 const General = memo(function General() {
   const {
     showGreeting,
@@ -51,15 +57,11 @@ const General = memo(function General() {
   return (
     <div className="general__container">
       <div className="general__row-item">
-        <span>Reduced motion</span>
+        <Translation value="reduced_motion" />
         <Select
           id="motion-preference-select"
           name="Reduced motion preference"
-          options={[
-            { value: "system", label: "System" },
-            { value: "on", label: "On" },
-            { value: "off", label: "Off" },
-          ]}
+          options={motionPreferenceOptions}
           value={motionPreference}
           onChange={(event) =>
             setMotionPreference(event.target.value as "system" | "on" | "off")

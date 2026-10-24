@@ -22,20 +22,22 @@ export function useHasBeenVisible(): boolean {
   return seen;
 }
 
-/**
- * Marks <html> while the tab is hidden so CSS can pause animations
- * (canvas/rAF work is already throttled by the browser).
- */
-export function trackTabHidden(): void {
-  const apply = () =>
-    document.documentElement.classList.toggle("tab-hidden", !isVisible());
-  apply();
-  document.addEventListener("visibilitychange", apply);
-}
-
 /** Tell the boot skeleton (public/boot.js) that a stage has finished. */
 export function bootSignal(stage: "appMounted" | "wallpaperReady"): void {
   try {
     (window as any).__bootSkeleton?.[stage]?.();
+  } catch {}
+}
+
+/**
+ * Resolves once the browser has decoded the image at `src`, so the first
+ * paint that uses it is not blank. Never rejects: an undecodable image just
+ * resolves early (the skeleton's safety net covers any stall).
+ */
+export async function decodeImage(src: string): Promise<void> {
+  try {
+    const img = new Image();
+    img.src = src;
+    await img.decode();
   } catch {}
 }
