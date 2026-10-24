@@ -79,7 +79,7 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
-import { bootSignal } from "../utils/useTabVisible";
+import { bootSignal, decodeImage } from "../utils/useTabVisible";
 import {
   clearWallpaperThumb,
   hasWallpaperThumb,
@@ -988,6 +988,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       if (!hasWallpaperThumb(activeSpaceId)) {
         saveWallpaperThumb(activeSpaceId, blobURL);
       }
+      // let the skeleton fade only once the image can actually be painted
+      await decodeImage(blobURL);
     } else {
       setBackgroundImage("");
       clearWallpaperThumb(activeSpaceId);
