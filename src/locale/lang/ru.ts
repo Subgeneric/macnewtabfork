@@ -268,6 +268,14 @@ const strings: Record<string, string> = {
   motion_system: "Система",
   motion_on: "Вкл.",
   motion_off: "Выкл.",
+  enable_keybinds: "Включить сочетания клавиш",
+  keybinds_hint:
+    "Для сочетаний нужны Ctrl, Alt или Cmd. Нажмите на сочетание, чтобы изменить его, и Backspace, чтобы очистить.",
+  keybind_press_keys: "Нажмите клавиши…",
+  keybind_not_set: "Не задано",
+  keybind_new_sticky_note: "Новая заметка",
+  keybind_screen_recorder: "Запись экрана",
+  keybind_open_settings: "Открыть настройки",
   animation_type: "Тип анимации",
   support_description:
     "Mac New Tab бесплатен и всегда будет бесплатным. Если вам нравится расширение, чашка кофе очень поможет поддержке проекта и разработке новых функций!",

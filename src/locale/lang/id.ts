@@ -265,6 +265,14 @@ const strings: Record<string, string> = {
   motion_system: "Sistem",
   motion_on: "Aktif",
   motion_off: "Nonaktif",
+  enable_keybinds: "Aktifkan Pintasan Keyboard",
+  keybinds_hint:
+    "Pintasan memerlukan Ctrl, Alt, atau Cmd. Klik pintasan untuk mengubahnya, lalu tekan Backspace untuk menghapusnya.",
+  keybind_press_keys: "Tekan tombol…",
+  keybind_not_set: "Belum diatur",
+  keybind_new_sticky_note: "Catatan Tempel Baru",
+  keybind_screen_recorder: "Perekam Layar",
+  keybind_open_settings: "Buka pengaturan",
   animation_type: "Jenis Animasi",
   support_description:
     "Mac New Tab gratis dan akan selalu begitu. Jika Anda menyukainya, traktir secangkir kopi akan sangat membantu dalam mendukung pembaruan dan fitur baru di masa mendatang!",

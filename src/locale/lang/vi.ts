@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "Hệ thống",
   motion_on: "Bật",
   motion_off: "Tắt",
+  enable_keybinds: "Bật phím tắt",
+  keybinds_hint:
+    "Phím tắt cần Ctrl, Alt hoặc Cmd. Nhấp vào phím tắt để thay đổi, nhấn Backspace để xóa.",
+  keybind_press_keys: "Nhấn phím…",
+  keybind_not_set: "Chưa đặt",
+  keybind_new_sticky_note: "Ghi chú dán mới",
+  keybind_screen_recorder: "Trình ghi màn hình",
+  keybind_open_settings: "Mở cài đặt",
   animation_type: "Loại hoạt ảnh",
   support_description:
     "Mac New Tab miễn phí và sẽ luôn như vậy. Nếu bạn thích, việc mời một ly cà phê nhỏ sẽ giúp ích rất nhiều cho việc hỗ trợ các bản cập nhật và tính năng mới trong tương lai!",

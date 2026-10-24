@@ -264,6 +264,14 @@ const strings: Record<string, string> = {
   motion_system: "सिस्टम",
   motion_on: "चालू",
   motion_off: "बंद",
+  enable_keybinds: "कीबोर्ड शॉर्टकट सक्षम करा",
+  keybinds_hint:
+    "शॉर्टकटसाठी Ctrl, Alt किंवा Cmd आवश्यक आहे. बदलण्यासाठी शॉर्टकटवर क्लिक करा, काढण्यासाठी Backspace दाबा.",
+  keybind_press_keys: "कळा दाबा…",
+  keybind_not_set: "सेट केलेले नाही",
+  keybind_new_sticky_note: "नवीन स्टिकी नोट",
+  keybind_screen_recorder: "स्क्रीन रेकॉर्डर",
+  keybind_open_settings: "सेटिंग्ज उघडा",
   animation_type: "ॲनिमेशन प्रकार",
   support_description:
     "मॅक न्यू टॅब विनामूल्य आहे आणि नेहमीच असेल. जर तुम्हाला हे आवडले असेल, तर एक छोटी कॉफी भेट दिल्यास भविष्यातील अपडेट्स आणि नवीन फीचर्स विकसित करण्यास खूप मदत होईल!",

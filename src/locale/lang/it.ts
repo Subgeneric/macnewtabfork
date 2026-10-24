@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "Sistema",
   motion_on: "Attivo",
   motion_off: "Disattivato",
+  enable_keybinds: "Abilita scorciatoie da tastiera",
+  keybinds_hint:
+    "Le scorciatoie richiedono Ctrl, Alt o Cmd. Clicca su una scorciatoia per cambiarla, premi Backspace per cancellarla.",
+  keybind_press_keys: "Premi i tasti…",
+  keybind_not_set: "Non impostata",
+  keybind_new_sticky_note: "Nuova nota adesiva",
+  keybind_screen_recorder: "Registratore schermo",
+  keybind_open_settings: "Apri impostazioni",
   animation_type: "Tipo di animazione",
   support_description:
     "Mac New Tab è gratuito e lo sarà sempre. Se ti piace, offrirmi un caffè è un grande aiuto per supportare i futuri aggiornamenti e le nuove funzionalità!",
