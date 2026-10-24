@@ -107,6 +107,7 @@ const strings: Record<string, string> = {
   tabs: "Schede browser",
   search_tabs: "Scheda Cerca",
   show_tab_manager: "Show Scheda Manager",
+  auto_hide_tab_manager: "Nascondi automaticamente il Gestore schede",
   show_sticky_notes: "Mostra note adesive",
   sticky_note_placeholder: "Digita la tua nota qui...",
   close_all: "Chiudi tutto",

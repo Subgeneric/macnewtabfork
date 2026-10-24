@@ -105,6 +105,7 @@ const strings: Record<string, string> = {
   tabs: "Tab Browser",
   search_tabs: "Pencarian tab",
   show_tab_manager: "Tampilkan Tab Manager",
+  auto_hide_tab_manager: "Sembunyikan Pengelola Tab Otomatis",
   show_sticky_notes: "Tampilkan Catatan Tempel",
   sticky_note_placeholder: "Ketik catatan Anda di sini...",
   close_all: "Tutup semua",

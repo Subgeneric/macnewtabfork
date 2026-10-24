@@ -107,6 +107,7 @@ const strings: Record<string, string> = {
   tabs: "Onglets de navigateur",
   search_tabs: "Recherche d'onglet",
   show_tab_manager: "Afficher le gestionnaire d'onglet",
+  auto_hide_tab_manager: "Masquer automatiquement le gestionnaire d'onglets",
   show_sticky_notes: "Afficher les notes autocollantes",
   sticky_note_placeholder: "Tapez votre note ici...",
   close_all: "Fermer tous",

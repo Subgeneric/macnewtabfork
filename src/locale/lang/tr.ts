@@ -105,6 +105,7 @@ const strings: Record<string, string> = {
   tabs: "Tarayıcı sekmeleri",
   search_tabs: "Sekme arama",
   show_tab_manager: "Sekme Yöneticisini Göster",
+  auto_hide_tab_manager: "Sekme Yöneticisini Otomatik Gizle",
   show_sticky_notes: "Yapışkan Notları Göster",
   sticky_note_placeholder: "Notunuzu buraya yazın...",
   close_all: "Hepsini kapat",

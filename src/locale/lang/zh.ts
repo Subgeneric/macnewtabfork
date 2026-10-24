@@ -104,6 +104,7 @@ const strings: Record<string, string> = {
   tabs: "浏览器选项卡",
   search_tabs: "选项卡搜索",
   show_tab_manager: "显示选项卡管理器",
+  auto_hide_tab_manager: "自动隐藏标签页管理器",
   show_sticky_notes: "显示便签",
   sticky_note_placeholder: "在此输入您的笔记...",
   close_all: "关闭全部",

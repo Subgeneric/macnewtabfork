@@ -105,6 +105,7 @@ const strings: Record<string, string> = {
   tabs: "Guias do navegador",
   search_tabs: "Pesquisa de guia",
   show_tab_manager: "Mostrar gerente de guia",
+  auto_hide_tab_manager: "Ocultar Gerenciador de abas automaticamente",
   show_sticky_notes: "Mostrar notas adesivas",
   sticky_note_placeholder: "Digite sua nota aqui...",
   close_all: "Feche tudo",

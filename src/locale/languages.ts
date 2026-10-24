@@ -107,6 +107,7 @@ const enTranslation = {
   tabs: "Tabs",
   search_tabs: "Search Tabs",
   show_tab_manager: "Show Tab Manager",
+  auto_hide_tab_manager: "Auto-hide Tab Manager",
   show_sticky_notes: "Show Sticky Notes",
   add_sticky_note: "Add Sticky Note",
   sticky_note_placeholder: "Type your note here...",

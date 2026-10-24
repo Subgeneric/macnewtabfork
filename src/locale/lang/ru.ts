@@ -107,6 +107,7 @@ const strings: Record<string, string> = {
   tabs: "Вкладки браузера",
   search_tabs: "Поиск вкладок",
   show_tab_manager: "Показывать менеджер вкладок",
+  auto_hide_tab_manager: "Автоскрытие менеджера вкладок",
   show_sticky_notes: "Показывать стикеры",
   add_sticky_note: "Добавить заметку",
   sticky_note_placeholder: "Введите заметку...",
