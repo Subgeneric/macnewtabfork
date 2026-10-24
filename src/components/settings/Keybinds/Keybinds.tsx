@@ -3,6 +3,7 @@ import "../general/General.css";
 import "./Keybinds.css";
 import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
+import { translation } from "../../../locale/languages";
 import Toggle from "../../toggle/Toggle";
 import {
   DEFAULT_KEYBINDS,
@@ -12,7 +13,9 @@ import {
   formatCombo,
 } from "../../../utils/keybinds";
 
-const ACTION_LABEL_KEYS: Record<KeybindAction, string> = {
+type TranslationKey = keyof (typeof translation)["en"];
+
+const ACTION_LABEL_KEYS: Record<KeybindAction, TranslationKey> = {
   launchpad: "launchpad",
   appStore: "app_store",
   todo: "todo",
