@@ -72,6 +72,8 @@ import {
 import { BOOKMARK_TOGGLE_STORAGE_KEY } from "../static/bookmarks";
 import { SELECTED_LOCALE_LOCAL_STORAGE_KEY } from "../static/locale";
 import { languages } from "../locale/languages";
+import { loadLocale } from "../locale/loadLocale";
+import { useLoadedLocale } from "../locale/useLoadedLocale";
 import {
   DOCK_POSITION_LOCAL_STORAGE_KEY,
   DOCK_SITES_LOCAL_STORAGE_KEY,
@@ -379,13 +381,25 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
-  const [locale, setLocale] = useLocalStorage<typeof languages>(
+  // The language the user picked. Only English ships in the main bundle, so
+  // `locale` below is the picked language once its strings have loaded.
+  const [wantedLocale, setWantedLocale] = useLocalStorage<typeof languages>(
     SELECTED_LOCALE_LOCAL_STORAGE_KEY,
     "en",
     (val) => {
       return languages.includes(String(val));
     },
     activeSpaceId,
+  );
+  const { locale, ready: localeReady } = useLoadedLocale(wantedLocale);
+  // Load the new language first so the UI switches in one step.
+  const setLocale = useCallback(
+    (next: typeof languages) => {
+      loadLocale(String(next)).then((ok) => {
+        if (ok) setWantedLocale(next);
+      });
+    },
+    [setWantedLocale],
   );
 
   const [theme, setTheme] = useLocalStorage(
@@ -1570,6 +1584,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+    <AppContext.Provider value={contextValue}>
+      {/* hold the app back until the saved language has loaded, so it never
+          flashes English first (the boot skeleton is still covering the page) */}
+      {localeReady ? children : null}
+    </AppContext.Provider>
   );
 }
