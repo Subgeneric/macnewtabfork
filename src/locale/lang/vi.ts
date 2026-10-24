@@ -106,7 +106,6 @@ const strings: Record<string, string> = {
   tabs: "Tab trình duyệt",
   search_tabs: "Tìm kiếm tab",
   show_tab_manager: "Hiển thị trình quản lý tab",
-  auto_hide_tab_manager: "Tự động ẩn Trình quản lý tab",
   show_sticky_notes: "Hiển thị ghi chú dính",
   sticky_note_placeholder: "Nhập ghi chú của bạn ở đây...",
   close_all: "Đóng tất cả",

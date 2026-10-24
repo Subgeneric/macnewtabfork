@@ -106,7 +106,6 @@ const strings: Record<string, string> = {
   tabs: "Karty",
   search_tabs: "Szukaj kart",
   show_tab_manager: "Pokaż Menedżera Kart",
-  auto_hide_tab_manager: "Automatycznie ukrywaj menedżera kart",
   show_sticky_notes: "Pokaż Notatki",
   sticky_note_placeholder: "Wpisz swoją notatkę tutaj...",
   close_all: "Zamknij wszystkie",

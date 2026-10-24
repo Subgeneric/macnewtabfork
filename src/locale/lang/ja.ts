@@ -105,7 +105,6 @@ const strings: Record<string, string> = {
   tabs: "ブラウザタブ",
   search_tabs: "タブ検索",
   show_tab_manager: "タブマネージャーを表示します",
-  auto_hide_tab_manager: "タブマネージャーを自動的に隠す",
   show_sticky_notes: "付箋を表示",
   sticky_note_placeholder: "ここにメモを入力してください...",
   close_all: "すべてを閉じます",

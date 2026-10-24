@@ -105,7 +105,6 @@ const strings: Record<string, string> = {
   tabs: "ब्राउज़र टैब",
   search_tabs: "टैब खोज",
   show_tab_manager: "शो टैब मैनेजर",
-  auto_hide_tab_manager: "टैब मैनेजर अपने आप छिपाएँ",
   show_sticky_notes: "स्टिकी नोट्स दिखाएं",
   sticky_note_placeholder: "अपना नोट यहाँ टाइप करें...",
   close_all: "सभी को बंद कर देना",

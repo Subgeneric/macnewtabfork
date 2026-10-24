@@ -35,7 +35,6 @@ import {
   SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY,
   SHOW_SEARCH_ENGINES_LOCAL_STORAGE_KEY,
   SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
-  AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
   SHOW_VISITED_SITE_LOCAL_STORAGE_KEY,
   USE_ANALOG_CLOCK_2_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
@@ -174,8 +173,6 @@ export const AppContext = createContext({
   setShowClockAndCalendar: (_: boolean) => {},
   showTabManager: true,
   setShowTabManager: (_: boolean) => {},
-  autoHideTabManager: false,
-  setAutoHideTabManager: (_: boolean) => {},
   showLaunchpad: true,
   setShowLaunchpad: (_: boolean) => {},
   showGoogleApps: true,
@@ -452,12 +449,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
   const [showTabManager, setShowTabManager] = useLocalStorage(
     SHOW_TAB_MANAGER_LOCAL_STORAGE_KEY,
     true,
-    undefined,
-    activeSpaceId,
-  );
-  const [autoHideTabManager, setAutoHideTabManager] = useLocalStorage(
-    AUTO_HIDE_TAB_MANAGER_LOCAL_STORAGE_KEY,
-    false,
     undefined,
     activeSpaceId,
   );
@@ -1356,8 +1347,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       showGoogleApps,
       showAppStore,
       setShowTabManager,
-      autoHideTabManager,
-      setAutoHideTabManager,
       setShowLaunchpad,
       setShowGoogleApps,
       setShowAppStore,
@@ -1487,8 +1476,6 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowClockAndCalendar,
       showTabManager,
       setShowTabManager,
-      autoHideTabManager,
-      setAutoHideTabManager,
       showLaunchpad,
       setShowLaunchpad,
       showGoogleApps,

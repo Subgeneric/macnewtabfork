@@ -15,6 +15,8 @@ import "./TabManager.css";
 import Translation from "../../locale/Translation";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
+import { createHoverPanel } from "../../utils/hoverPanel";
+import { useReducedMotion } from "../../utils/useReducedMotion";
 
 const getGroupedTabs = (tabs: chrome.tabs.Tab[], search: string) => {
   return tabs.reduce((prev: Record<number, chrome.tabs.Tab[]>, current) => {
@@ -43,9 +45,43 @@ const TabManager = memo(() => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [tabList, setTabList] = useState<chrome.tabs.Tab[]>([]);
-  const { locale, autoHideTabManager } = useContext(AppContext);
+  const { locale } = useContext(AppContext);
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+
+  // Hover to open / leave to close is on unless motion is reduced; with
+  // reduced motion the panel keeps its classic click-to-open behaviour.
+  const hoverMode = !useReducedMotion();
+  // Opened by hovering: don't steal keyboard focus from whatever the person
+  // was typing in. Cleared again whenever the panel closes.
+  const focusSearchOnOpen = useRef(true);
+  const closeOnLeave = useRef(false);
+
+  const hover = useMemo(
+    () =>
+      createHoverPanel({
+        open: () => {
+          focusSearchOnOpen.current = false;
+          closeOnLeave.current = true;
+          setOpen(true);
+        },
+        close: () => setOpen(false),
+        // Keep the panel while a search is typed in
+        canClose: () => !searchRef.current?.value,
+      }),
+    [],
+  );
+  useEffect(() => {
+    if (!hoverMode) hover.cancel();
+    return () => hover.cancel();
+  }, [hover, hoverMode]);
+  useEffect(() => {
+    if (!open) {
+      focusSearchOnOpen.current = true;
+      closeOnLeave.current = false;
+    }
+  }, [open]);
 
   useEffect(() => {
     const timerRef = setTimeout(() => {
@@ -61,7 +97,7 @@ const TabManager = memo(() => {
 
   useEffect(() => {
     if (open) {
-      searchRef.current && searchRef.current.focus();
+      if (focusSearchOnOpen.current) searchRef.current?.focus();
 
       handleUpdateTabList();
       setSearch("");
@@ -110,7 +146,19 @@ const TabManager = memo(() => {
 
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
+    closeOnLeave.current = hoverMode;
     setOpen(true);
+  };
+
+  // While open from a hover (or a click in hover mode), leaving the panel
+  // closes it. Panels opened another way stay until dismissed.
+  const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (!hoverMode || !open || !closeOnLeave.current) return;
+    if (panelRef.current?.contains(event.target as Node)) hover.overPanel();
+    else hover.outsidePanel();
+  };
+  const handlePointerLeave = () => {
+    if (hoverMode && open && closeOnLeave.current) hover.outsidePanel();
   };
 
   const handleRemoveTab = (
@@ -248,14 +296,13 @@ const TabManager = memo(() => {
 
   return (
     <aside
-      className={
-        "tab-manager__overlay" +
-        (open ? " open" : "") +
-        (autoHideTabManager ? " auto-hide" : "")
-      }
+      className={"tab-manager__overlay" + (open ? " open" : "")}
       onClick={() => setOpen(false)}
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
     >
       <section
+        ref={panelRef}
         className={"tab-manager__content" + (open ? " open" : "")}
         onClick={(event) => event.stopPropagation()}
       >
@@ -381,10 +428,12 @@ const TabManager = memo(() => {
           )}
         </div>
       </section>
-      {autoHideTabManager && (
-        <div className="tab-manager__hover-zone" aria-hidden="true" />
-      )}
-      <button className="tab-manager__anchor" onClick={handleOpen}>
+      <button
+        className="tab-manager__anchor"
+        onClick={handleOpen}
+        onMouseEnter={hoverMode ? hover.enterTrigger : undefined}
+        onMouseLeave={hoverMode ? hover.leaveTrigger : undefined}
+      >
         <div className="tab-manager__anchor-bar"></div>
       </button>
     </aside>

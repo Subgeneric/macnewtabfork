@@ -215,35 +215,3 @@
   font-size: 0.875rem;
   color: var(--theme-clr);
 }
-
-/* ── Auto-hide: the pull-tab pops in when the left edge is hovered ── */
-.tab-manager__hover-zone {
-  position: absolute;
-  left: 0;
-  top: calc(50% - 90px);
-  width: 12px;
-  height: 180px;
-  pointer-events: auto;
-}
-
-.tab-manager__overlay.open .tab-manager__hover-zone {
-  display: none;
-}
-
-.tab-manager__overlay.auto-hide:not(.open) .tab-manager__anchor {
-  transform: translateX(-100%);
-  opacity: 0;
-  transition:
-    transform 0.2s ease 0.6s,
-    opacity 0.2s ease 0.6s;
-}
-
-.tab-manager__overlay.auto-hide:not(.open)
-  .tab-manager__hover-zone:hover
-  + .tab-manager__anchor,
-.tab-manager__overlay.auto-hide:not(.open) .tab-manager__anchor:hover,
-.tab-manager__overlay.auto-hide:not(.open) .tab-manager__anchor:focus-visible {
-  transform: none;
-  opacity: 1;
-  transition-delay: 0s;
-}

@@ -105,7 +105,6 @@ const strings: Record<string, string> = {
   tabs: "ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ಗಳು",
   search_tabs: "ಟ್ಯಾಬ್ ಹುಡುಕಾಟ",
   show_tab_manager: "TAB ವ್ಯವಸ್ಥಾಪಕವನ್ನು ತೋರಿಸಿ",
-  auto_hide_tab_manager: "ಟ್ಯಾಬ್ ಮ್ಯಾನೇಜರ್ ಸ್ವಯಂ ಮರೆಮಾಡಿ",
   show_sticky_notes: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ತೋರಿಸಿ",
   sticky_note_placeholder: "ನಿಮ್ಮ ಟಿಪ್ಪಣಿಯನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...",
   close_all: "ಎಲ್ಲವನ್ನು ಮುಚ್ಚಿ",

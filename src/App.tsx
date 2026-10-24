@@ -21,6 +21,7 @@ import Translation from "./locale/Translation";
 import Dock from "./components/dock/Dock";
 import FooterNotice from "./components/footer-notice/FooterNotice";
 import { bootSignal } from "./utils/useTabVisible";
+import { useReducedMotion } from "./utils/useReducedMotion";
 
 // Rarely-needed pieces load on demand to keep the first paint light
 const TabManager = lazy(() => import("./components/tab-manager/TabManager"));
@@ -58,31 +59,16 @@ const App = function App() {
     interactiveWallpaperTheme,
     enableLoadAnimation,
     loadAnimationType,
-    motionPreference,
     activeSpaceId,
     activeSpace,
     spacesConfig,
     centerWidgetsLayout,
   } = useContext(AppContext);
 
-  const [systemPrefersReducedMotion, setSystemPrefersReducedMotion] = useState(
-    () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false,
-  );
-  const prefersReducedMotion =
-    motionPreference === "on" ||
-    (motionPreference === "system" && systemPrefersReducedMotion);
+  const prefersReducedMotion = useReducedMotion();
   const [isWakingUp, setIsWakingUp] = useState(
     () => enableLoadAnimation && !prefersReducedMotion,
   );
-
-  // Follow OS changes only in System mode; On and Off are explicit overrides.
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setSystemPrefersReducedMotion(mediaQuery.matches);
-    updatePreference();
-    mediaQuery.addEventListener("change", updatePreference);
-    return () => mediaQuery.removeEventListener("change", updatePreference);
-  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) setIsWakingUp(false);

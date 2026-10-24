@@ -105,7 +105,6 @@ const strings: Record<string, string> = {
   tabs: "Pestañas",
   search_tabs: "Buscar pestañas",
   show_tab_manager: "Mostrar administrador de pestañas",
-  auto_hide_tab_manager: "Ocultar Administrador de pestañas automáticamente",
   show_sticky_notes: "Mostrar notas adhesivas",
   sticky_note_placeholder: "Escribe tu nota aquí...",
   close_all: "Cerrar todo",

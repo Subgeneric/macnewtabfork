@@ -105,7 +105,6 @@ const strings: Record<string, string> = {
   tabs: "Karty prohlížeče",
   search_tabs: "Vyhledávání na kartě",
   show_tab_manager: "Zobrazit správce Tab",
-  auto_hide_tab_manager: "Automaticky skrýt správce karet",
   show_sticky_notes: "Zobrazit lepící poznámky",
   sticky_note_placeholder: "Zde napište svou poznámku...",
   close_all: "Zavřete všechny",

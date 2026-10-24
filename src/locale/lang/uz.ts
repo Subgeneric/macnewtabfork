@@ -106,7 +106,6 @@ const strings: Record<string, string> = {
   tabs: "Brauzer yorliqlari",
   search_tabs: "Yorliqni qidirish",
   show_tab_manager: "Tab menejerini ko'rsatish",
-  auto_hide_tab_manager: "Yorliq menejerini avtomatik yashirish",
   show_sticky_notes: "Yopishqoq eslatmalarni ko'rsatish",
   sticky_note_placeholder: "Eslatmangizni shu yerga yozing...",
   close_all: "Hammasini yaqin",

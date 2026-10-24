@@ -104,7 +104,6 @@ const strings: Record<string, string> = {
   tabs: "브라우저 탭",
   search_tabs: "탭 검색",
   show_tab_manager: "탭 관리자 표시",
-  auto_hide_tab_manager: "탭 관리자 자동 숨기기",
   show_sticky_notes: "스티키 노트 표시",
   sticky_note_placeholder: "여기에 메모를 입력하세요...",
   close_all: "모두 닫으십시오",
