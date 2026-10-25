@@ -16,12 +16,13 @@ export function useReducedMotion(): boolean {
 
   // Follow OS changes only in System mode; On and Off are explicit overrides.
   useEffect(() => {
+    if (motionPreference !== "system") return;
     const mediaQuery = window.matchMedia(QUERY);
     const update = () => setSystemPrefersReducedMotion(mediaQuery.matches);
     update();
     mediaQuery.addEventListener("change", update);
     return () => mediaQuery.removeEventListener("change", update);
-  }, []);
+  }, [motionPreference]);
 
   return (
     motionPreference === "on" ||

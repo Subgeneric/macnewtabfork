@@ -17,6 +17,8 @@ import {
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
+  KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+  KEYBINDS_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
@@ -72,6 +74,7 @@ import {
 import { syncNotesToChrome, Note } from "./stickyNotesSync";
 import { FREEFORM_DATA_LOCAL_STORAGE_KEY } from "../static/freeformSettings";
 import { SPACES_CONFIG_KEY } from "../static/spacesSettings";
+import { isValidKeybinds } from "./keybinds";
 
 const STICKY_NOTES_KEY = "macnewtab_sticky_notes";
 
@@ -114,6 +117,8 @@ const KEYS_TO_EXPORT = [
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
+  KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+  KEYBINDS_LOCAL_STORAGE_KEY,
   SHOW_FOCUS_MODE_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
@@ -395,13 +400,28 @@ export const importData = (file: File): Promise<void> => {
         }
 
         KEYS_TO_EXPORT.forEach((key) => {
-          if (data[key] !== undefined) {
-            const value = data[key];
-            if (typeof value === "object") {
-              localStorage.setItem(key, JSON.stringify(value));
-            } else {
-              localStorage.setItem(key, String(value));
-            }
+          if (data[key] === undefined) return;
+
+          const value = data[key];
+
+          // Validate shortcuts from backups before writing them to storage.
+          // Invalid shortcut data is skipped, preserving the current settings.
+          if (key === KEYBINDS_LOCAL_STORAGE_KEY && !isValidKeybinds(value)) {
+            console.warn("Skipping invalid keybinds in imported backup");
+            return;
+          }
+          if (
+            key === KEYBINDS_ENABLED_LOCAL_STORAGE_KEY &&
+            typeof value !== "boolean"
+          ) {
+            console.warn("Skipping invalid keybinds-enabled value in imported backup");
+            return;
+          }
+
+          if (typeof value === "object" && value !== null) {
+            localStorage.setItem(key, JSON.stringify(value));
+          } else {
+            localStorage.setItem(key, String(value));
           }
         });
 

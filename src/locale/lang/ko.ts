@@ -263,6 +263,14 @@ const strings: Record<string, string> = {
   motion_system: "시스템",
   motion_on: "켬",
   motion_off: "끔",
+  enable_keybinds: "키보드 단축키 사용",
+  keybinds_hint:
+    "단축키에는 Ctrl, Alt 또는 Cmd가 필요합니다. 단축키를 클릭해 변경하고 Backspace로 지웁니다.",
+  keybind_press_keys: "키를 누르세요…",
+  keybind_not_set: "설정 안 됨",
+  keybind_new_sticky_note: "새 스티커 메모",
+  keybind_screen_recorder: "화면 녹화",
+  keybind_open_settings: "설정 열기",
   animation_type: "애니메이션 유형",
   support_description:
     "Mac 신규 탭은 항상 무료로 제공됩니다. 유용하게 사용하고 계신다면, 작은 커피 한 잔의 후원이 향후 업데이트와 새로운 기능 개발에 큰 힘이 됩니다!",

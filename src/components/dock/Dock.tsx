@@ -27,6 +27,10 @@ import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
 import { attachDockEffects } from "./dockEffects";
 import { useReducedMotion } from "../../utils/useReducedMotion";
+import {
+  findActionForEvent,
+  shouldLeaveToTextField,
+} from "../../utils/keybinds";
 
 const LaunchpadLazy = lazy(() => import("../launchpad/Launchpad"));
 const DockFolderModalLazy = lazy(() =>
@@ -89,6 +93,9 @@ const Dock = memo(() => {
     customLaunchpadLinks,
     openSettingsToWeather,
     setOpenSettingsToWeather,
+    keybindsEnabled,
+    keybinds,
+    showTabManager,
   } = useContext(AppContext);
 
   const t = translation[locale] || translation.en;
@@ -215,6 +222,118 @@ const Dock = memo(() => {
   const hasLaunchpadContent =
     bookmarksVisible || showGoogleApps || !!customLaunchpadLinks?.length;
   const shouldShowLaunchpad = showLaunchpad && hasLaunchpadContent;
+
+  // ── Keyboard shortcuts (see utils/keybinds.ts) ──
+  useEffect(() => {
+    if (!keybindsEnabled) return;
+
+    const handler = (e: KeyboardEvent) => {
+      // Never fire shortcuts while an IME is composing text.
+      if (e.isComposing || e.repeat) return;
+      // The shortcut editor in Settings is recording a new combo
+      if (document.documentElement.hasAttribute("data-recording-keybind")) {
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      const typing =
+        !!target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable);
+      // Editing shortcuts and text-producing keystrokes belong to the field
+      if (typing && shouldLeaveToTextField(e)) return;
+      // Don't act behind a blocking dialog (a confirm dialog or a dock folder)
+      if (openedFolder || document.querySelector('[aria-modal="true"]')) {
+        return;
+      }
+
+      const action = findActionForEvent(e, keybinds);
+      if (!action) return;
+
+      // Launchpad, App Store and Settings are exclusive panels. Every shortcut
+      // closes them, except the one it toggles, so its result is never hidden
+      // behind a panel that was already open.
+      const closeOtherPanels = (
+        keep?: "launchpad" | "appStore" | "settings",
+      ) => {
+        if (keep !== "launchpad") setLaunchpadVisible(false);
+        if (keep !== "appStore") setAppStoreVisible(false);
+        if (keep !== "settings") setSettingsVisible(false);
+      };
+
+      switch (action) {
+        case "launchpad":
+          if (!shouldShowLaunchpad) return;
+          closeOtherPanels("launchpad");
+          setLaunchpadVisible((v) => !v);
+          break;
+        case "appStore":
+          if (!showAppStore) return;
+          closeOtherPanels("appStore");
+          setHasOpenedAppStore(true);
+          setAppStoreVisible((v) => !v);
+          break;
+        case "todo":
+          if (!todoListVisbility) return;
+          closeOtherPanels();
+          groupTodosByCheckedStatus();
+          setHasOpenedTodo(true);
+          setTodoDialogOpen((v) => !v);
+          break;
+        case "stickyNote":
+          if (!showStickyNotes) return;
+          closeOtherPanels();
+          window.dispatchEvent(new CustomEvent("createStickyNote"));
+          break;
+        case "focusMode":
+          if (!showFocusMode) return;
+          closeOtherPanels();
+          setHasOpenedFocusMode(true);
+          setFocusModeVisible((v) => !v);
+          break;
+        case "freeform":
+          if (!showFreeform) return;
+          closeOtherPanels();
+          setHasOpenedFreeform(true);
+          setFreeformVisible((v) => !v);
+          break;
+        case "screenRecorder":
+          if (!showScreenRecorder) return;
+          closeOtherPanels();
+          setHasOpenedScreenRecorder(true);
+          setScreenRecorderVisible((v) => !v);
+          break;
+        case "settings":
+          closeOtherPanels("settings");
+          setHasOpenedSettings(true);
+          setSettingsVisible((v) => !v);
+          break;
+        case "tabManager":
+          if (!showTabManager) return;
+          closeOtherPanels();
+          window.dispatchEvent(new CustomEvent("toggleTabManager"));
+          break;
+      }
+      e.preventDefault();
+    };
+
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [
+    keybindsEnabled,
+    keybinds,
+    shouldShowLaunchpad,
+    showAppStore,
+    todoListVisbility,
+    groupTodosByCheckedStatus,
+    showStickyNotes,
+    showFocusMode,
+    showFreeform,
+    showScreenRecorder,
+    showTabManager,
+    openedFolder,
+  ]);
 
   return (
     <>

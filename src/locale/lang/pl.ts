@@ -267,6 +267,14 @@ const strings: Record<string, string> = {
   motion_system: "System",
   motion_on: "Włączone",
   motion_off: "Wyłączone",
+  enable_keybinds: "Włącz skróty klawiszowe",
+  keybinds_hint:
+    "Skróty wymagają Ctrl, Alt lub Cmd. Kliknij skrót, aby go zmienić, i naciśnij Backspace, aby go wyczyścić.",
+  keybind_press_keys: "Naciśnij klawisze…",
+  keybind_not_set: "Nie ustawiono",
+  keybind_new_sticky_note: "Nowa karteczka",
+  keybind_screen_recorder: "Rejestrator ekranu",
+  keybind_open_settings: "Otwórz ustawienia",
   animation_type: "Typ animacji",
   support_description:
     "Mac New Tab jest darmowy i zawsze taki będzie. Jeśli lubisz z niego korzystać, postawienie mi małej kawy bardzo pomoże w pracy nad przyszłymi aktualizacjami i nowymi funkcjami!",

@@ -258,6 +258,14 @@ const strings: Record<string, string> = {
   motion_system: "跟随系统",
   motion_on: "开",
   motion_off: "关",
+  enable_keybinds: "启用键盘快捷键",
+  keybinds_hint:
+    "快捷键需要 Ctrl、Alt 或 Cmd。点击快捷键即可修改，按 Backspace 清除。",
+  keybind_press_keys: "请按下按键…",
+  keybind_not_set: "未设置",
+  keybind_new_sticky_note: "新建便签",
+  keybind_screen_recorder: "屏幕录制",
+  keybind_open_settings: "打开设置",
   animation_type: "动画类型",
   support_description:
     "Mac New Tab 会一直免费。如果您喜欢使用它，请我喝杯咖啡将极大地帮助支持未来的更新和新功能！",

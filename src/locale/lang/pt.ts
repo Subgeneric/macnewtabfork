@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "Sistema",
   motion_on: "Ativado",
   motion_off: "Desativado",
+  enable_keybinds: "Ativar atalhos de teclado",
+  keybinds_hint:
+    "Os atalhos exigem Ctrl, Alt ou Cmd. Clique em um atalho para alterá-lo e pressione Backspace para apagá-lo.",
+  keybind_press_keys: "Pressione as teclas…",
+  keybind_not_set: "Não definido",
+  keybind_new_sticky_note: "Nova nota adesiva",
+  keybind_screen_recorder: "Gravador de tela",
+  keybind_open_settings: "Abrir configurações",
   animation_type: "Tipo de animação",
   support_description:
     "O Mac New Tab é gratuito e sempre será. Se você gosta de usá-lo, pagar um cafezinho ajuda muito a apoiar futuras atualizações e novos recursos!",

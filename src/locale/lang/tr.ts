@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "Sistem",
   motion_on: "Açık",
   motion_off: "Kapalı",
+  enable_keybinds: "Klavye Kısayollarını Etkinleştir",
+  keybinds_hint:
+    "Kısayollar Ctrl, Alt veya Cmd gerektirir. Değiştirmek için kısayola tıklayın, silmek için Backspace tuşuna basın.",
+  keybind_press_keys: "Tuşlara basın…",
+  keybind_not_set: "Ayarlanmadı",
+  keybind_new_sticky_note: "Yeni Yapışkan Not",
+  keybind_screen_recorder: "Ekran Kaydedici",
+  keybind_open_settings: "Ayarları aç",
   animation_type: "Animasyon Türü",
   support_description:
     "Mac New Tab ücretsizdir ve her zaman öyle kalacaktır. Kullanmaktan keyif alıyorsanız, küçük bir kahve ısmarlamak gelecekteki güncellemeleri ve yeni özellikleri desteklemeye çok yardımcı olur!",
