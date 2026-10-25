@@ -45,7 +45,7 @@ const TabManager = memo(() => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [tabList, setTabList] = useState<chrome.tabs.Tab[]>([]);
-  const { locale } = useContext(AppContext);
+  const { locale, tabManagerAutoHide } = useContext(AppContext);
 
   const searchRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLElement>(null);
@@ -53,7 +53,7 @@ const TabManager = memo(() => {
 
   // Hover to open / leave to close is on unless motion is reduced; with
   // reduced motion the panel keeps its classic click-to-open behaviour.
-  const hoverMode = !useReducedMotion();
+  const hoverMode = tabManagerAutoHide && !useReducedMotion();
   // Opened by hovering: don't steal keyboard focus from whatever the person
   // was typing in. Cleared again whenever the panel closes.
   const focusSearchOnOpen = useRef(true);
