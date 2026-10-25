@@ -49,6 +49,7 @@ const TabManager = memo(() => {
 
   const searchRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+  const anchorRef = useRef<HTMLButtonElement>(null);
 
   // Hover to open / leave to close is on unless motion is reduced; with
   // reduced motion the panel keeps its classic click-to-open behaviour.
@@ -158,10 +159,16 @@ const TabManager = memo(() => {
   };
 
   // While open from a hover (or a click in hover mode), leaving the panel
-  // closes it. Panels opened another way stay until dismissed.
+  // closes it. The pull-tab counts as part of the panel, so resting on it
+  // keeps the panel open. Panels opened another way stay until dismissed.
   const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
     if (!hoverMode || !open || !closeOnLeave.current) return;
-    if (panelRef.current?.contains(event.target as Node)) hover.overPanel();
+    const target = event.target as Node;
+    if (
+      panelRef.current?.contains(target) ||
+      anchorRef.current?.contains(target)
+    )
+      hover.overPanel();
     else hover.outsidePanel();
   };
   const handlePointerLeave = () => {
@@ -436,6 +443,7 @@ const TabManager = memo(() => {
         </div>
       </section>
       <button
+        ref={anchorRef}
         className="tab-manager__anchor"
         onClick={handleOpen}
         onMouseEnter={hoverMode ? hover.enterTrigger : undefined}
