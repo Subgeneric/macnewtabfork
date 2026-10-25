@@ -39,6 +39,8 @@
 }
 
 .tab-manager__anchor {
+  /* Keep the visible pull-tab small while making it easier to hit. */
+  isolation: isolate;
   position: absolute;
   top: calc(50% - 70px);
   height: 140px;
@@ -55,6 +57,17 @@
   pointer-events: auto;
   z-index: -1;
   box-shadow: 4px 0px 30px var(--theme-shadow);
+}
+
+.tab-manager__anchor::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 220px;
+  background: transparent;
 }
 
 .tab-manager__anchor-bar {
