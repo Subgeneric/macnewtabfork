@@ -25,6 +25,8 @@ import "./Dock.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 import { LinkItem } from "../settings/shared/LinkListEditor";
+import { attachDockEffects } from "./dockEffects";
+import { useReducedMotion } from "../../utils/useReducedMotion";
 
 const LaunchpadLazy = lazy(() => import("../launchpad/Launchpad"));
 const DockFolderModalLazy = lazy(() =>
@@ -121,7 +123,18 @@ const Dock = memo(() => {
     }
   }, [settingsVisible]);
 
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // macOS-style magnification and click hop. They follow the Reduced motion
+  // setting, and need room around the icons, so they pause while the dock is
+  // scrolling (too many icons to fit).
+  const reducedMotion = useReducedMotion();
+  const dockEffects = !reducedMotion && !isOverflowButtonVisible;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!dockEffects || !container) return;
+    return attachDockEffects(container, dockPosition === "bottom");
+  }, [dockEffects, dockPosition]);
 
   const checkOverflowButtonVisibility = useCallback(() => {
     const container = containerRef.current as unknown as HTMLDivElement;
@@ -217,7 +230,9 @@ const Dock = memo(() => {
           </button>
         )}
         <div
-          className={`dock-container ${dockPosition}`}
+          className={`dock-container ${dockPosition}${
+            dockEffects ? " dock-effects" : ""
+          }`}
           ref={containerRef}
           onScroll={checkOverflow}
         >
