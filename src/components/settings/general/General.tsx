@@ -34,6 +34,8 @@ const General = memo(function General() {
     setShowClockAndCalendar,
     showTabManager,
     setShowTabManager,
+    tabManagerAutoHide,
+    setTabManagerAutoHide,
     locale,
     setLocale,
     isWidgetsAwayFromDock,
@@ -185,6 +187,16 @@ const General = memo(function General() {
           name="Tab manager toggle"
           isChecked={showTabManager}
           handleToggleChange={() => setShowTabManager(!showTabManager)}
+        />
+      </div>
+
+      <div className={"general__row-item" + (!showTabManager ? " disabled" : "")}>
+        <span>Auto-hide / auto-appear tab manager</span>
+        <Toggle
+          id={"tab-manager-auto-hide-toggle"}
+          name="Tab manager auto-hide and auto-appear toggle"
+          isChecked={tabManagerAutoHide}
+          handleToggleChange={() => setTabManagerAutoHide(!tabManagerAutoHide)}
         />
       </div>
 
