@@ -53,7 +53,11 @@ const TabManager = memo(() => {
 
   // Hover to open / leave to close is on unless motion is reduced; with
   // reduced motion the panel keeps its classic click-to-open behaviour.
-  const hoverMode = tabManagerAutoHide && !useReducedMotion();
+  // Call the hook unconditionally (Rules of Hooks): `a && !useReducedMotion()`
+  // skips it while auto-hide is off, so toggling the setting live would change
+  // the number of hooks between renders and crash the component.
+  const reducedMotion = useReducedMotion();
+  const hoverMode = tabManagerAutoHide && !reducedMotion;
   // Opened by hovering: don't steal keyboard focus from whatever the person
   // was typing in. Cleared again whenever the panel closes.
   const focusSearchOnOpen = useRef(true);
