@@ -65,8 +65,8 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 64px;
-  height: 220px;
+  width: 213px;
+  height: calc(100vh - 32px);
   background: transparent;
 }
 
