@@ -4,6 +4,7 @@ import { AppContext } from "../../../context/provider";
 import Translation from "../../../locale/Translation";
 import Toggle from "../../toggle/Toggle";
 import { Select } from "../../select/Select";
+import Keybinds from "../Keybinds/Keybinds";
 
 export default function Advanced() {
   const {
@@ -68,6 +69,7 @@ export default function Advanced() {
           onChange={(event) => setLoadAnimationType(event.target.value)}
         />
       </div>
+      <Keybinds />
     </div>
   );
 }

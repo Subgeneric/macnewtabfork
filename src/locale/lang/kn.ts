@@ -260,6 +260,14 @@ const strings: Record<string, string> = {
   motion_system: "ಸಿಸ್ಟಮ್",
   motion_on: "ಆನ್",
   motion_off: "ಆಫ್",
+  enable_keybinds: "ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+  keybinds_hint:
+    "ಶಾರ್ಟ್‌ಕಟ್‌ಗಳಿಗೆ Ctrl, Alt ಅಥವಾ Cmd ಬೇಕು. ಬದಲಾಯಿಸಲು ಶಾರ್ಟ್‌ಕಟ್ ಕ್ಲಿಕ್ ಮಾಡಿ, ತೆರವುಗೊಳಿಸಲು Backspace ಒತ್ತಿ.",
+  keybind_press_keys: "ಕೀಗಳನ್ನು ಒತ್ತಿ…",
+  keybind_not_set: "ಹೊಂದಿಸಿಲ್ಲ",
+  keybind_new_sticky_note: "ಹೊಸ ಸ್ಟಿಕ್ಕಿ ನೋಟ್",
+  keybind_screen_recorder: "ಸ್ಕ್ರೀನ್ ರೆಕಾರ್ಡರ್",
+  keybind_open_settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
   animation_type: "ಅನಿಮೇಷನ್ ಪ್ರಕಾರ",
   support_description:
     "ಮ್ಯಾಕ್ ನ್ಯೂ ಟ್ಯಾಬ್ ಉಚಿತವಾಗಿದೆ ಮತ್ತು ಯಾವಾಗಲೂ ಇರಲಿದೆ. ನಿಮಗೆ ಇದು ಇಷ್ಟವಾದರೆ, ಒಂದು ಚಿಕ್ಕ ಕಾಫಿ ಕೊಡಿಸುವ ಮೂಲಕ ಬೆಂಬಲಿಸಿದರೆ ಮುಂದಿನ ಅಪ್‌ಡೇಟ್‌ಗಳು ಹಾಗೂ ಹೊಸ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ತರಲು ತುಂಬಾ ಸಹಾಯವಾಗುತ್ತದೆ!",

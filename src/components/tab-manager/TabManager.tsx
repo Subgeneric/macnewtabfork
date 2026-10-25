@@ -144,6 +144,13 @@ const TabManager = memo(() => {
     return tabList.some((tab) => tab.audible);
   }, [tabList]);
 
+  // Keyboard shortcut (see utils/keybinds) toggles the panel via this event
+  useEffect(() => {
+    const toggle = () => setOpen((prev) => !prev);
+    window.addEventListener("toggleTabManager", toggle);
+    return () => window.removeEventListener("toggleTabManager", toggle);
+  }, []);
+
   const handleOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
     closeOnLeave.current = hoverMode;

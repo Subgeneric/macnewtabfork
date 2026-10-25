@@ -266,6 +266,14 @@ const strings: Record<string, string> = {
   motion_system: "सिस्टम",
   motion_on: "चालू",
   motion_off: "बंद",
+  enable_keybinds: "कीबोर्ड शॉर्टकट सक्षम करें",
+  keybinds_hint:
+    "शॉर्टकट के लिए Ctrl, Alt या Cmd ज़रूरी है। बदलने के लिए शॉर्टकट पर क्लिक करें, हटाने के लिए Backspace दबाएँ।",
+  keybind_press_keys: "कुंजियाँ दबाएँ…",
+  keybind_not_set: "सेट नहीं",
+  keybind_new_sticky_note: "नया स्टिकी नोट",
+  keybind_screen_recorder: "स्क्रीन रिकॉर्डर",
+  keybind_open_settings: "सेटिंग्स खोलें",
   animation_type: "एनिमेशन प्रकार",
   support_description:
     "मैक न्यू टैब हमेशा मुफ़्त रहेगा। अगर आपको यह पसंद है, तो एक छोटी सी कॉफ़ी पिलाकर आप भविष्य के अपडेट और नए फ़ीचर्स लाने में हमारी बहुत मदद कर सकते हैं!",

@@ -269,6 +269,14 @@ const strings: Record<string, string> = {
   motion_system: "Tizim",
   motion_on: "Yoqilgan",
   motion_off: "O‘chirilgan",
+  enable_keybinds: "Klaviatura yorliqlarini yoqish",
+  keybinds_hint:
+    "Yorliqlar uchun Ctrl, Alt yoki Cmd kerak. O'zgartirish uchun yorliqni bosing, o'chirish uchun Backspace bosing.",
+  keybind_press_keys: "Tugmalarni bosing…",
+  keybind_not_set: "O'rnatilmagan",
+  keybind_new_sticky_note: "Yangi yopishqoq qayd",
+  keybind_screen_recorder: "Ekranni yozib olish",
+  keybind_open_settings: "Sozlamalarni ochish",
   animation_type: "Animatsiya turi",
   support_description:
     "Mac New Tab bepul va har doim shunday bo'ladi. Agar u sizga yoqsa, kichik bir qahva bilan siylash kelajakdagi yangilanishlar va yangi xususiyatlarni qo'llab-quvvatlashga juda katta yordam beradi!",

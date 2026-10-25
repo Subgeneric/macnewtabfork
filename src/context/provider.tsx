@@ -47,6 +47,8 @@ import {
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
+  KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+  KEYBINDS_LOCAL_STORAGE_KEY,
   CLOCK_STYLE_LOCAL_STORAGE_KEY,
   USE_SEARCH_DROPDOWN_LOCAL_STORAGE_KEY,
   CENTER_WIDGETS_LAYOUT_LOCAL_STORAGE_KEY,
@@ -81,6 +83,11 @@ import {
   DockPosition,
   dockPositionsList,
 } from "../static/dockSites";
+import {
+  Keybinds,
+  DEFAULT_KEYBINDS,
+  isValidKeybinds,
+} from "../utils/keybinds";
 import { bootSignal, decodeImage } from "../utils/useTabVisible";
 import {
   clearWallpaperThumb,
@@ -242,6 +249,10 @@ export const AppContext = createContext({
   setMotionPreference: (_: "system" | "on" | "off") => {},
   loadAnimationType: "crt-wake-up",
   setLoadAnimationType: (_: string) => {},
+  keybindsEnabled: false,
+  setKeybindsEnabled: (_: boolean) => {},
+  keybinds: DEFAULT_KEYBINDS as Keybinds,
+  setKeybinds: (_: Keybinds) => {},
   showWeather: true,
   setShowWeather: (_: boolean) => {},
   weatherTempUnit: "celsius",
@@ -634,6 +645,18 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
     "system",
     (val) => val === "system" || val === "on" || val === "off",
+  );
+
+  // Keyboard shortcuts are global: they must not change when a time-based
+  // space switches the active space.
+  const [keybindsEnabled, setKeybindsEnabled] = useLocalStorage(
+    KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
+    false,
+  );
+  const [keybinds, setKeybinds] = useLocalStorage<Keybinds>(
+    KEYBINDS_LOCAL_STORAGE_KEY,
+    DEFAULT_KEYBINDS,
+    isValidKeybinds,
   );
 
   const [centerWidgetsLayout, setCenterWidgetsLayout] =
@@ -1430,6 +1453,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,
@@ -1562,6 +1589,10 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setMotionPreference,
       loadAnimationType,
       setLoadAnimationType,
+      keybindsEnabled,
+      setKeybindsEnabled,
+      keybinds,
+      setKeybinds,
       centerWidgetsLayout,
       setCenterWidgetsLayout,
       leftWidgetsOrder,
