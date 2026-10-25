@@ -58,6 +58,7 @@ const TabManager = memo(() => {
   // was typing in. Cleared again whenever the panel closes.
   const focusSearchOnOpen = useRef(true);
   const closeOnLeave = useRef(false);
+  const pointerOutsidePanel = useRef(false);
 
   const hover = useMemo(
     () =>
@@ -81,8 +82,23 @@ const TabManager = memo(() => {
     if (!open) {
       focusSearchOnOpen.current = true;
       closeOnLeave.current = false;
+      pointerOutsidePanel.current = false;
     }
   }, [open]);
+
+  // If a close was deferred because search had text, clearing it should
+  // resume the pending close when the pointer is already outside the panel.
+  useEffect(() => {
+    if (
+      !search &&
+      hoverMode &&
+      open &&
+      closeOnLeave.current &&
+      pointerOutsidePanel.current
+    ) {
+      hover.outsidePanel();
+    }
+  }, [search, hover, hoverMode, open]);
 
   useEffect(() => {
     const timerRef = setTimeout(() => {
@@ -167,11 +183,16 @@ const TabManager = memo(() => {
     if (
       panelRef.current?.contains(target) ||
       anchorRef.current?.contains(target)
-    )
+    ) {
+      pointerOutsidePanel.current = false;
       hover.overPanel();
-    else hover.outsidePanel();
+    } else {
+      pointerOutsidePanel.current = true;
+      hover.outsidePanel();
+    }
   };
   const handlePointerLeave = () => {
+    pointerOutsidePanel.current = true;
     if (hoverMode && open && closeOnLeave.current) hover.outsidePanel();
   };
 
