@@ -18,6 +18,9 @@ import { translation } from "../../locale/languages";
 import { createHoverPanel } from "../../utils/hoverPanel";
 import { useReducedMotion } from "../../utils/useReducedMotion";
 
+const HOVER_ACTIVATION_WIDTH = 213;
+const HOVER_ACTIVATION_MARGIN = 16;
+
 const getGroupedTabs = (tabs: chrome.tabs.Tab[], search: string) => {
   return tabs.reduce((prev: Record<number, chrome.tabs.Tab[]>, current) => {
     if (
@@ -45,15 +48,20 @@ const TabManager = memo(() => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [tabList, setTabList] = useState<chrome.tabs.Tab[]>([]);
-  const { locale } = useContext(AppContext);
+  const { locale, tabManagerAutoHide } = useContext(AppContext);
 
   const searchRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const anchorRef = useRef<HTMLButtonElement>(null);
+  const activationZoneActive = useRef(false);
 
   // Hover to open / leave to close is on unless motion is reduced; with
   // reduced motion the panel keeps its classic click-to-open behaviour.
-  const hoverMode = !useReducedMotion();
+  // Call the hook unconditionally (Rules of Hooks): `a && !useReducedMotion()`
+  // skips it while auto-hide is off, so toggling the setting live would change
+  // the number of hooks between renders and crash the component.
+  const reducedMotion = useReducedMotion();
+  const hoverMode = tabManagerAutoHide && !reducedMotion;
   // Opened by hovering: don't steal keyboard focus from whatever the person
   // was typing in. Cleared again whenever the panel closes.
   const focusSearchOnOpen = useRef(true);
@@ -74,9 +82,48 @@ const TabManager = memo(() => {
     [],
   );
   useEffect(() => {
-    if (!hoverMode) hover.cancel();
-    return () => hover.cancel();
-  }, [hover, hoverMode]);
+    if (!hoverMode) {
+      activationZoneActive.current = false;
+      hover.cancel();
+      return () => hover.cancel();
+    }
+
+    // Use pointer coordinates instead of a transparent overlay: the underlying
+    // page and sticky notes remain the actual event targets.
+    const handleDocumentPointerMove = (event: PointerEvent) => {
+      const target = event.target as HTMLElement | null;
+      const overStickyNote = Boolean(target?.closest(".sticky-note"));
+      const overPanel =
+        Boolean(target && panelRef.current?.contains(target)) ||
+        Boolean(target && anchorRef.current?.contains(target));
+      const inActivationZone =
+        !overStickyNote &&
+        !panelRef.current?.contains(target) &&
+        event.clientX >= 0 &&
+        event.clientX <= HOVER_ACTIVATION_WIDTH &&
+        event.clientY >= HOVER_ACTIVATION_MARGIN &&
+        event.clientY <= window.innerHeight - HOVER_ACTIVATION_MARGIN;
+
+      if (inActivationZone && !activationZoneActive.current) {
+        hover.enterTrigger();
+      } else if (!inActivationZone && activationZoneActive.current) {
+        hover.leaveTrigger();
+      }
+      activationZoneActive.current = inActivationZone;
+
+      if (open && closeOnLeave.current) {
+        if (overPanel || inActivationZone) hover.overPanel();
+        else hover.outsidePanel();
+      }
+    };
+
+    window.addEventListener("pointermove", handleDocumentPointerMove);
+    return () => {
+      window.removeEventListener("pointermove", handleDocumentPointerMove);
+      activationZoneActive.current = false;
+      hover.cancel();
+    };
+  }, [hover, hoverMode, open]);
   useEffect(() => {
     if (!open) {
       focusSearchOnOpen.current = true;
@@ -156,23 +203,6 @@ const TabManager = memo(() => {
     event.stopPropagation();
     closeOnLeave.current = hoverMode;
     setOpen(true);
-  };
-
-  // While open from a hover (or a click in hover mode), leaving the panel
-  // closes it. The pull-tab counts as part of the panel, so resting on it
-  // keeps the panel open. Panels opened another way stay until dismissed.
-  const handlePointerMove = (event: React.MouseEvent<HTMLElement>) => {
-    if (!hoverMode || !open || !closeOnLeave.current) return;
-    const target = event.target as Node;
-    if (
-      panelRef.current?.contains(target) ||
-      anchorRef.current?.contains(target)
-    )
-      hover.overPanel();
-    else hover.outsidePanel();
-  };
-  const handlePointerLeave = () => {
-    if (hoverMode && open && closeOnLeave.current) hover.outsidePanel();
   };
 
   const handleRemoveTab = (
@@ -308,13 +338,27 @@ const TabManager = memo(() => {
     }
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    const handleOutsidePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (
+        panelRef.current?.contains(target) ||
+        anchorRef.current?.contains(target)
+      ) {
+        return;
+      }
+      setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handleOutsidePointerDown);
+    return () =>
+      document.removeEventListener("pointerdown", handleOutsidePointerDown);
+  }, [open]);
+
   return (
-    <aside
-      className={"tab-manager__overlay" + (open ? " open" : "")}
-      onClick={() => setOpen(false)}
-      onMouseMove={handlePointerMove}
-      onMouseLeave={handlePointerLeave}
-    >
+    <aside className={"tab-manager__overlay" + (open ? " open" : "")}>
       <section
         ref={panelRef}
         className={"tab-manager__content" + (open ? " open" : "")}
@@ -446,8 +490,6 @@ const TabManager = memo(() => {
         ref={anchorRef}
         className="tab-manager__anchor"
         onClick={handleOpen}
-        onMouseEnter={hoverMode ? hover.enterTrigger : undefined}
-        onMouseLeave={hoverMode ? hover.leaveTrigger : undefined}
       >
         <div className="tab-manager__anchor-bar"></div>
       </button>
