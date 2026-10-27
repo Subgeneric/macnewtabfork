@@ -1539,6 +1539,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       handleDockSitesChange,
       dockPosition,
       setDockPosition,
+      dockEffectsEnabled,
+      setDockEffectsEnabled,
       todoList,
       handleAddTodoList,
       handleTodoItemChecked,
