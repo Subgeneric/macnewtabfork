@@ -14,6 +14,8 @@ export default memo(function Dock() {
     handleDockSitesChange,
     dockPosition,
     setDockPosition,
+    dockEffectsEnabled,
+    setDockEffectsEnabled,
     enableStickyNotesSync,
     setEnableStickyNotesSync,
     showAppStore,
@@ -62,6 +64,27 @@ export default memo(function Dock() {
           isChecked={enableStickyNotesSync}
           handleToggleChange={() =>
             setEnableStickyNotesSync(!enableStickyNotesSync)
+          }
+        />
+      </div>
+
+      <div className="dock-app__toggle">
+        <div className="dock-app__toggle-info">
+          <span>
+            <h3 className="dock-app__toggle-title">
+              macOS-style dock effects
+            </h3>
+            <h4 className="dock-app__toggle-description">
+              Magnify icons as the pointer moves over the dock and bounce icons when clicked.
+            </h4>
+          </span>
+        </div>
+        <Toggle
+          id="dock-effects-toggle"
+          name="macOS-style dock effects toggle"
+          isChecked={dockEffectsEnabled}
+          handleToggleChange={() =>
+            setDockEffectsEnabled(!dockEffectsEnabled)
           }
         />
       </div>
