@@ -3,77 +3,79 @@ import "./Weather.css";
 import { AppContext } from "../../context/provider";
 import { translation } from "../../locale/languages";
 
-// WeatherAPI.com condition code → emoji mapping
-// https://www.weatherapi.com/docs/#weather-icons
-const getWeatherEmoji = (code: number, isDay: boolean): string => {
-  // Sunny / Clear
-  if (code === 1000) return isDay ? "☀️" : "🌙";
-  // Partly cloudy
-  if (code === 1003) return isDay ? "🌤️" : "🌙";
-  // Cloudy
-  if (code === 1006) return "⛅";
-  // Overcast
-  if (code === 1009) return "☁️";
-  // Mist, Fog, Freezing fog
-  if (code === 1030 || code === 1135 || code === 1147) return "🌫️";
-  // Drizzle variants
-  if (code === 1150 || code === 1153 || code === 1168 || code === 1171)
-    return "🌦️";
-  // Rain variants
-  if (
-    code === 1063 ||
-    code === 1180 ||
-    code === 1183 ||
-    code === 1186 ||
-    code === 1189 ||
-    code === 1192 ||
-    code === 1195 ||
-    code === 1240 ||
-    code === 1243 ||
-    code === 1246
-  )
-    return "🌧️";
-  // Freezing rain / sleet
-  if (
-    code === 1069 ||
-    code === 1072 ||
-    code === 1198 ||
-    code === 1201 ||
-    code === 1204 ||
-    code === 1207 ||
-    code === 1237 ||
-    code === 1249 ||
-    code === 1252
-  )
-    return "🌧️";
-  // Snow variants
-  if (
-    code === 1066 ||
-    code === 1114 ||
-    code === 1117 ||
-    code === 1210 ||
-    code === 1213 ||
-    code === 1216 ||
-    code === 1219 ||
-    code === 1222 ||
-    code === 1225 ||
-    code === 1255 ||
-    code === 1258 ||
-    code === 1261 ||
-    code === 1264
-  )
-    return "❄️";
-  // Thunderstorm variants
-  if (
-    code === 1087 ||
-    code === 1273 ||
-    code === 1276 ||
-    code === 1279 ||
-    code === 1282
-  )
-    return "⛈️";
-  return "🌡️";
+type WeatherKind =
+  | "sun" | "partly-cloudy" | "cloud" | "fog"
+  | "drizzle" | "rain" | "snow" | "sleet" | "thunder" | "unknown";
+
+// WeatherAPI.com condition codes grouped by the type of weather.
+const getWeatherKind = (code: number): WeatherKind => {
+  if (code === 1000) return "sun";
+  if (code === 1003) return "partly-cloudy";
+  if (code === 1006 || code === 1009) return "cloud";
+  if ([1030, 1135, 1147].includes(code)) return "fog";
+  if ([1150, 1153, 1168, 1171].includes(code)) return "drizzle";
+  if ([1063, 1180, 1183, 1186, 1189, 1192, 1195, 1240, 1243, 1246].includes(code)) return "rain";
+  if ([1066, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(code)) return "snow";
+  if ([1069, 1072, 1198, 1201, 1204, 1207, 1237, 1249, 1252, 1261, 1264].includes(code)) return "sleet";
+  if ([1087, 1273, 1276, 1279, 1282].includes(code)) return "thunder";
+  return "unknown";
 };
+
+const WeatherIcon = memo(function WeatherIcon({
+  code,
+  className = "",
+}: {
+  code: number;
+  isDay?: boolean;
+  className?: string;
+}) {
+  const kind = getWeatherKind(code);
+  const common = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  return (
+    <svg
+      className={`weather-icon-svg ${className}`}
+      viewBox="0 0 40 40"
+      aria-hidden="true"
+      focusable="false"
+      {...common}
+    >
+      {(kind === "sun" || kind === "partly-cloudy") && (
+        <>
+          <circle cx="15" cy="14" r="6" />
+          <path d="M15 3v3 M15 22v3 M4 14h3 M23 14h3 M7.2 6.2l2.1 2.1 M20.7 19.7l2.1 2.1 M22.8 6.2l-2.1 2.1" />
+        </>
+      )}
+      {(kind === "cloud" || kind === "partly-cloudy" || kind === "fog" ||
+        kind === "drizzle" || kind === "rain" || kind === "snow" ||
+        kind === "sleet" || kind === "thunder") && (
+        <path d="M10 29h19a6 6 0 0 0 .3-12 9.5 9.5 0 0 0-18-1.7A7 7 0 0 0 10 29Z" fill="currentColor" stroke="none" />
+      )}
+      {kind === "fog" && <path d="M7 33h25 M11 37h18" />}
+      {kind === "drizzle" && <path d="M14 32l-1 2 M22 32l-1 2 M30 32l-1 2" />}
+      {kind === "rain" && <path d="M13 32l-2 4 M21 32l-2 4 M29 32l-2 4" />}
+      {kind === "snow" && (
+        <>
+          <path d="M14 32v6 M11 33.5l6 3 M17 33.5l-6 3 M26 32v6 M23 33.5l6 3 M29 33.5l-6 3" />
+        </>
+      )}
+      {kind === "sleet" && <path d="M13 32l-2 4 M23 32v6 M20 33.5l6 3 M26 33.5l-6 3" />}
+      {kind === "thunder" && <path d="M22 28l-7 7h5l-2 5 9-9h-5l2-3" fill="currentColor" stroke="none" />}
+      {kind === "unknown" && (
+        <>
+          <circle cx="20" cy="20" r="13" />
+          <path d="M20 13v9 M20 27h.01" />
+        </>
+      )}
+    </svg>
+  );
+});
 
 const Weather = memo(function Weather() {
   const {
@@ -91,7 +93,7 @@ const Weather = memo(function Weather() {
   if (weatherLoading) {
     return (
       <div className="weather-widget weather-loading">
-        <span className="weather-icon">🌡️</span>
+        <WeatherIcon code={1000} className="weather-status-icon" />
         <span className="weather-text">
           {translation[locale]?.weather_loading || "Loading weather..."}
         </span>
@@ -106,7 +108,7 @@ const Weather = memo(function Weather() {
         onClick={() => setOpenSettingsToWeather(true)}
         title={translation[locale]?.weather_api_key_needed || "API key needed"}
       >
-        <span className="weather-icon">🔑</span>
+        <span className="weather-status-icon" aria-hidden="true">⚙</span>
         <span className="weather-text">
           {translation[locale]?.weather_api_key_needed || "API key needed"}
         </span>
@@ -117,7 +119,7 @@ const Weather = memo(function Weather() {
   if (weatherError) {
     return (
       <div className="weather-widget weather-error">
-        <span className="weather-icon">🌡️</span>
+        <WeatherIcon code={-1} className="weather-status-icon" />
         <span className="weather-text">
           {translation[locale]?.[
             weatherError as keyof (typeof translation)[typeof locale]
@@ -128,8 +130,6 @@ const Weather = memo(function Weather() {
   }
 
   if (!weatherData) return null;
-
-  const icon = getWeatherEmoji(weatherData.conditionCode, weatherData.isDay);
 
   return (
     <div className={`weather-widget weather-widget--${weatherForecastDisplay}`}>
@@ -143,11 +143,12 @@ const Weather = memo(function Weather() {
               {weatherData.temperature}
               <span className="weather-degree">{tempSymbol}</span>
             </span>
-            <span className="weather-icon">{icon}</span>
+            <WeatherIcon code={weatherData.conditionCode} className="weather-current-icon" />
           </div>
+          <span className="weather-label">{weatherData.conditionText}</span>
         </div>
-        <span className="weather-label">{weatherData.conditionText}</span>
       </div>
+
       {(weatherForecastDisplay === "3-day" || weatherForecastDisplay === "both") && (
         <div className="weather-forecast-days">
           {weatherData.forecastDays?.map((day, index) => {
@@ -160,22 +161,25 @@ const Weather = memo(function Weather() {
             return (
               <div className="weather-forecast-day" key={day.date} title={day.conditionText}>
                 <span className="weather-forecast-day-name">{dayLabel}</span>
-                <span className="weather-forecast-day-icon">{getWeatherEmoji(day.conditionCode, true)}</span>
-                <span className="weather-forecast-day-temps">{day.maxTemperature}° <span>{day.minTemperature}°</span></span>
-                <span className="weather-forecast-rain">{day.chanceOfRain}% ☂</span>
+                <WeatherIcon code={day.conditionCode} className="weather-forecast-day-icon" />
+                <span className="weather-forecast-day-temps">
+                  {day.maxTemperature}° <span>{day.minTemperature}°</span>
+                </span>
+                <span className="weather-forecast-rain">{day.chanceOfRain}% <span aria-hidden="true">☂</span></span>
               </div>
             );
           })}
         </div>
       )}
+
       {(weatherForecastDisplay === "hourly" || weatherForecastDisplay === "both") && (
         <div className="weather-forecast-hourly" aria-label={translation[locale]?.weather_forecast_hourly || "Hourly forecast"}>
           {weatherData.hourlyForecast?.map((hour) => (
             <div className="weather-forecast-hour" key={hour.time}>
               <span className="weather-forecast-hour-time">{hour.time.slice(11, 16)}</span>
-              <span className="weather-forecast-hour-icon">{getWeatherEmoji(hour.conditionCode, hour.isDay)}</span>
+              <WeatherIcon code={hour.conditionCode} className="weather-forecast-hour-icon" />
               <span className="weather-forecast-hour-temp">{hour.temperature}°</span>
-              <span className="weather-forecast-rain">{hour.chanceOfRain}% ☂</span>
+              <span className="weather-forecast-rain">{hour.chanceOfRain}% <span aria-hidden="true">☂</span></span>
             </div>
           ))}
         </div>
