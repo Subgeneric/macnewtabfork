@@ -83,3 +83,73 @@
 .weather-api-key-needed:hover {
   opacity: 1;
 }
+
+.weather-widget:has(.weather-forecast-days),
+.weather-widget:has(.weather-forecast-hourly) {
+  width: min(320px, calc(100vw - 32px));
+  box-sizing: border-box;
+}
+
+.weather-forecast-days {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--theme-border);
+}
+
+.weather-forecast-day,
+.weather-forecast-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: 10px;
+  color: var(--theme-clr);
+}
+
+.weather-forecast-day-name,
+.weather-forecast-hour-time {
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.weather-forecast-day-icon,
+.weather-forecast-hour-icon {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.weather-forecast-day-temps,
+.weather-forecast-hour-temp {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.weather-forecast-day-temps span {
+  opacity: 0.55;
+  font-weight: 400;
+}
+
+.weather-forecast-rain {
+  font-size: 9px;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.weather-forecast-hourly {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  margin-top: 12px;
+  padding: 10px 1px 4px;
+  border-top: 1px solid var(--theme-border);
+  scrollbar-width: thin;
+}
+
+.weather-forecast-hour {
+  flex: 0 0 38px;
+}
