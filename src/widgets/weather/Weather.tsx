@@ -132,7 +132,8 @@ const Weather = memo(function Weather() {
   const icon = getWeatherEmoji(weatherData.conditionCode, weatherData.isDay);
 
   return (
-    <div className="weather-widget">
+    <div className={`weather-widget weather-widget--${weatherForecastDisplay}`}>
+      <div className="weather-current">
       {weatherData.cityName && (
         <span className="weather-city">{weatherData.cityName}</span>
       )}
@@ -144,6 +145,7 @@ const Weather = memo(function Weather() {
         <span className="weather-icon">{icon}</span>
       </div>
       <span className="weather-label">{weatherData.conditionText}</span>
+      </div>
       {(weatherForecastDisplay === "3-day" || weatherForecastDisplay === "both") && (
         <div className="weather-forecast-days">
           {weatherData.forecastDays?.map((day, index) => {
