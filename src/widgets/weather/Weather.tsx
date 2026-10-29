@@ -82,6 +82,7 @@ const Weather = memo(function Weather() {
     weatherData,
     weatherLoading,
     weatherError,
+    weatherForecastDisplay,
     setOpenSettingsToWeather,
   } = useContext(AppContext);
 
@@ -143,6 +144,38 @@ const Weather = memo(function Weather() {
         <span className="weather-icon">{icon}</span>
       </div>
       <span className="weather-label">{weatherData.conditionText}</span>
+      {(weatherForecastDisplay === "3-day" || weatherForecastDisplay === "both") && (
+        <div className="weather-forecast-days">
+          {weatherData.forecastDays?.map((day, index) => {
+            const date = new Date(`${day.date}T12:00:00`);
+            const dayLabel = index === 0
+              ? (translation[locale]?.weather_today || "Today")
+              : index === 1
+                ? (translation[locale]?.weather_tomorrow || "Tomorrow")
+                : date.toLocaleDateString(locale, { weekday: "short" });
+            return (
+              <div className="weather-forecast-day" key={day.date} title={day.conditionText}>
+                <span className="weather-forecast-day-name">{dayLabel}</span>
+                <span className="weather-forecast-day-icon">{getWeatherEmoji(day.conditionCode, true)}</span>
+                <span className="weather-forecast-day-temps">{day.maxTemperature}° <span>{day.minTemperature}°</span></span>
+                <span className="weather-forecast-rain">{day.chanceOfRain}% ☂</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {(weatherForecastDisplay === "hourly" || weatherForecastDisplay === "both") && (
+        <div className="weather-forecast-hourly" aria-label="Hourly forecast">
+          {weatherData.hourlyForecast?.map((hour) => (
+            <div className="weather-forecast-hour" key={hour.time}>
+              <span className="weather-forecast-hour-time">{hour.time.slice(11, 16)}</span>
+              <span className="weather-forecast-hour-icon">{getWeatherEmoji(hour.conditionCode, hour.isDay)}</span>
+              <span className="weather-forecast-hour-temp">{hour.temperature}°</span>
+              <span className="weather-forecast-rain">{hour.chanceOfRain}% ☂</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 });
