@@ -269,7 +269,7 @@ export const AppContext = createContext({
   weatherTempUnit: "celsius",
   setWeatherTempUnit: (_: string) => {},
   weatherForecastDisplay: "current" as "current" | "3-day" | "hourly" | "both",
-  setWeatherForecastDisplay: (_: string) => {},
+  setWeatherForecastDisplay: (_: WeatherForecastDisplay) => {},
   weatherLocationMode: "auto",
   setWeatherLocationMode: (_: string) => {},
   weatherManualLocation: null as {
