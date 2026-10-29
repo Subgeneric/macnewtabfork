@@ -210,15 +210,15 @@ const WeatherSettings = memo(function WeatherSettings() {
           "weather-settings__row-item" + (!showWeather ? " disabled" : "")
         }
       >
-        <label htmlFor="weather-forecast-display">Forecast display</label>
+        <label htmlFor="weather-forecast-display">{translation[locale]?.weather_forecast_display || "Forecast display"}</label>
         <Select
           id="weather-forecast-display"
           name="Weather forecast display"
           options={[
-            { label: "Current only", value: "current" },
-            { label: "Next 3 days", value: "3-day" },
-            { label: "Hourly (24 hours)", value: "hourly" },
-            { label: "Both", value: "both" },
+            { label: translation[locale]?.weather_forecast_current || "Current only", value: "current" },
+            { label: translation[locale]?.weather_forecast_3day || "Next 3 days", value: "3-day" },
+            { label: translation[locale]?.weather_forecast_hourly || "Hourly (24 hours)", value: "hourly" },
+            { label: translation[locale]?.weather_forecast_both || "Both", value: "both" },
           ]}
           value={weatherForecastDisplay}
           onChange={(event) => {
