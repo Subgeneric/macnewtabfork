@@ -165,7 +165,7 @@ const Weather = memo(function Weather() {
         </div>
       )}
       {(weatherForecastDisplay === "hourly" || weatherForecastDisplay === "both") && (
-        <div className="weather-forecast-hourly" aria-label="Hourly forecast">
+        <div className="weather-forecast-hourly" aria-label={translation[locale]?.weather_forecast_hourly || "Hourly forecast"}>
           {weatherData.hourlyForecast?.map((hour) => (
             <div className="weather-forecast-hour" key={hour.time}>
               <span className="weather-forecast-hour-time">{hour.time.slice(11, 16)}</span>
