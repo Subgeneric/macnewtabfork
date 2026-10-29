@@ -40,7 +40,7 @@ const WeatherIcon = memo(function WeatherIcon({
 
   return (
     <svg
-      className={`weather-icon-svg ${className}`}
+      className={`weather-icon-svg weather-icon--${kind} ${className}`}
       viewBox="0 0 40 40"
       aria-hidden="true"
       focusable="false"
