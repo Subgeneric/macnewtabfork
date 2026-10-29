@@ -134,17 +134,19 @@ const Weather = memo(function Weather() {
   return (
     <div className={`weather-widget weather-widget--${weatherForecastDisplay}`}>
       <div className="weather-current">
-      {weatherData.cityName && (
-        <span className="weather-city">{weatherData.cityName}</span>
-      )}
-      <div className="weather-main">
-        <span className="weather-temp">
-          {weatherData.temperature}
-          <span className="weather-degree">{tempSymbol}</span>
-        </span>
-        <span className="weather-icon">{icon}</span>
-      </div>
-      <span className="weather-label">{weatherData.conditionText}</span>
+        <div className="weather-current-top">
+          {weatherData.cityName && (
+            <span className="weather-city">{weatherData.cityName}</span>
+          )}
+          <div className="weather-main">
+            <span className="weather-temp">
+              {weatherData.temperature}
+              <span className="weather-degree">{tempSymbol}</span>
+            </span>
+            <span className="weather-icon">{icon}</span>
+          </div>
+        </div>
+        <span className="weather-label">{weatherData.conditionText}</span>
       </div>
       {(weatherForecastDisplay === "3-day" || weatherForecastDisplay === "both") && (
         <div className="weather-forecast-days">
