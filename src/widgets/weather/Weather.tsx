@@ -169,6 +169,7 @@ const Weather = memo(function Weather() {
         </div>
       )}
     </div>
+  );
 });
 
 export default Weather;
