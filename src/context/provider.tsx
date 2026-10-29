@@ -153,6 +153,7 @@ const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 type DockBarSites = Array<LinkItem>;
 type QuickLinksSites = Array<LinkItem>;
 type TodoList = Array<{ content: string; id: string; checked: boolean }>;
+type WeatherForecastDisplay = "current" | "3-day" | "hourly" | "both";
 type WeatherForecastHour = { time: string; temperature: number; conditionCode: number; isDay: boolean; chanceOfRain: number };
 type WeatherForecastDay = { date: string; maxTemperature: number; minTemperature: number; conditionCode: number; conditionText: string; chanceOfRain: number };
 type WeatherData = { temperature: number; conditionCode: number; conditionText: string; isDay: boolean; windSpeed: number; cityName: string; latitude: number; longitude: number; timestamp: number; forecastDays: WeatherForecastDay[]; hourlyForecast: WeatherForecastHour[] };
@@ -768,12 +769,17 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     activeSpaceId,
   );
 
-  const [weatherForecastDisplay, setWeatherForecastDisplay] = useLocalStorage(
-    WEATHER_FORECAST_DISPLAY_LOCAL_STORAGE_KEY,
-    "current",
-    (val) => val === "current" || val === "3-day" || val === "hourly" || val === "both",
-    activeSpaceId,
-  );
+  const [weatherForecastDisplay, setWeatherForecastDisplay] =
+    useLocalStorage<WeatherForecastDisplay>(
+      WEATHER_FORECAST_DISPLAY_LOCAL_STORAGE_KEY,
+      "current",
+      (val): val is WeatherForecastDisplay =>
+        val === "current" ||
+        val === "3-day" ||
+        val === "hourly" ||
+        val === "both",
+      activeSpaceId,
+    );
 
   const [weatherLocationMode, setWeatherLocationMode] = useLocalStorage(
     WEATHER_LOCATION_MODE_LOCAL_STORAGE_KEY,
