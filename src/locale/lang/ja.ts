@@ -206,6 +206,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "付箋を同期",
   enable_sticky_notes_sync_description:
     "Chromeアカウントを使用してデバイス間で付箋を同期します",
+  dock_effects: "macOS風のDockエフェクト",
+  dock_effects_description:
+    "ポインタをDockに合わせるとアイコンが拡大し、クリックするとアイコンが跳ねます。",
   show_battery: "バッテリーウィジェットを表示",
   battery_charging: "充電中",
   battery_label: "バッテリー",

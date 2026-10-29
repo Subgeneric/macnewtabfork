@@ -203,6 +203,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Synchronizovat lepící poznámky",
   enable_sticky_notes_sync_description:
     "Synchronizujte lepící poznámky mezi zařízeními pomocí účtu Chrome",
+  dock_effects: "Efekty docku ve stylu macOS",
+  dock_effects_description:
+    "Ikony se zvětšují při pohybu kurzoru po docku a při kliknutí poskočí.",
   show_battery: "Zobrazit widget baterie",
   battery_charging: "Nabíjení",
   battery_label: "Baterie",

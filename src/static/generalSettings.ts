@@ -26,6 +26,7 @@ export type CenterWidgetsLayout = (typeof centerWidgetsLayoutsList)[number];
 export const SHOW_LAUNCHPAD_LOCAL_STORAGE_KEY = "show_launchpad";
 export const SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY = "show_google_apps";
 export const SHOW_APP_STORE_LOCAL_STORAGE_KEY = "show_app_store";
+export const DOCK_EFFECTS_ENABLED_LOCAL_STORAGE_KEY = "dock_effects_enabled";
 
 export const SHOW_SEARCH_BAR_LOCAL_STORAGE_KEY = "show_search_bar";
 

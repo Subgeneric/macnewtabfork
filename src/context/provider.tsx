@@ -28,6 +28,7 @@ import {
 } from "../static/theme";
 import {
   CENTER_WIDGETS_AWAY_FROM_DOCK_STORAGE_KEY,
+  DOCK_EFFECTS_ENABLED_LOCAL_STORAGE_KEY,
   SEPARATE_PAGE_LINKS_LOCAL_STORAGE_KEY,
   SHOW_CLOCK_AND_CALENDAR_LOCAL_STORAGE_KEY,
   SHOW_GREETING_LOCAL_STORAGE_KEY,
@@ -159,6 +160,8 @@ export const AppContext = createContext({
   setThemeColor: (_: string) => {},
   dockPosition: "bottom",
   setDockPosition: (_: DockPosition) => {},
+  dockEffectsEnabled: true,
+  setDockEffectsEnabled: (_: boolean) => {},
   locale: "en" as typeof languages,
   setLocale: (_: typeof languages) => {},
   dockBarSites: [] as DockBarSites,
@@ -510,6 +513,12 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     (val) => {
       return dockPositionsList.includes(val || "");
     },
+    activeSpaceId,
+  );
+  const [dockEffectsEnabled, setDockEffectsEnabled] = useLocalStorage(
+    DOCK_EFFECTS_ENABLED_LOCAL_STORAGE_KEY,
+    true,
+    undefined,
     activeSpaceId,
   );
   const [todoList, setTodoList] = useState<TodoList>([]);
@@ -1390,6 +1399,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       handleDockSitesChange,
       dockPosition,
       setDockPosition,
+      dockEffectsEnabled,
+      setDockEffectsEnabled,
       todoList,
       handleAddTodoList,
       handleTodoItemChecked,
@@ -1528,6 +1539,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       handleDockSitesChange,
       dockPosition,
       setDockPosition,
+      dockEffectsEnabled,
+      setDockEffectsEnabled,
       todoList,
       handleAddTodoList,
       handleTodoItemChecked,

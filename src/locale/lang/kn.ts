@@ -207,6 +207,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
   enable_sticky_notes_sync_description:
     "ನಿಮ್ಮ Chrome ಖಾತೆಯನ್ನು ಬಳಸಿ ಸಾಧನಗಳ ನಡುವೆ ಸ್ಟಿಕಿ ನೋಟ್‌ಗಳನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
+  dock_effects: "macOS ಶೈಲಿಯ ಡಾಕ್ ಪರಿಣಾಮಗಳು",
+  dock_effects_description:
+    "ಪಾಯಿಂಟರ್ ಡಾಕ್ ಮೇಲೆ ಚಲಿಸಿದಾಗ ಐಕಾನ್‌ಗಳು ದೊಡ್ಡದಾಗುತ್ತವೆ ಮತ್ತು ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ ಜಿಗಿಯುತ್ತವೆ.",
   show_battery: "ಬ್ಯಾಟರಿ ವಿಜೆಟ್ ತೋರಿಸಿ",
   battery_charging: "ಚಾರ್ಜ್ ಆಗುತ್ತಿದೆ",
   battery_label: "ಬ್ಯಾಟರಿ",

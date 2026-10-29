@@ -231,6 +231,9 @@ const enTranslation = {
   enable_sticky_notes_sync: "Sync Sticky Notes",
   enable_sticky_notes_sync_description:
     "Sync sticky notes across devices using your Chrome account",
+  dock_effects: "macOS-style dock effects",
+  dock_effects_description:
+    "Magnify icons as the pointer moves over the dock and bounce icons when clicked.",
   show_battery: "Show Battery Widget",
   battery_charging: "Charging",
   battery_label: "Battery",

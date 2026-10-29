@@ -14,6 +14,8 @@ export default memo(function Dock() {
     handleDockSitesChange,
     dockPosition,
     setDockPosition,
+    dockEffectsEnabled,
+    setDockEffectsEnabled,
     enableStickyNotesSync,
     setEnableStickyNotesSync,
     showAppStore,
@@ -63,6 +65,25 @@ export default memo(function Dock() {
           handleToggleChange={() =>
             setEnableStickyNotesSync(!enableStickyNotesSync)
           }
+        />
+      </div>
+
+      <div className="dock-app__toggle">
+        <div className="dock-app__toggle-info">
+          <span>
+            <h3 className="dock-app__toggle-title">
+              <Translation value="dock_effects" />
+            </h3>
+            <h4 className="dock-app__toggle-description">
+              <Translation value="dock_effects_description" />
+            </h4>
+          </span>
+        </div>
+        <Toggle
+          id="dock-effects-toggle"
+          name="Dock effects toggle"
+          isChecked={dockEffectsEnabled}
+          handleToggleChange={() => setDockEffectsEnabled(!dockEffectsEnabled)}
         />
       </div>
 

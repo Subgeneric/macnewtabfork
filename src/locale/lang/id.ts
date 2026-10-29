@@ -205,6 +205,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Sinkronkan Catatan Tempel",
   enable_sticky_notes_sync_description:
     "Sinkronkan catatan tempel antar perangkat menggunakan akun Chrome Anda",
+  dock_effects: "Efek Dock gaya macOS",
+  dock_effects_description:
+    "Ikon membesar saat penunjuk melewati Dock dan memantul saat diklik.",
   show_battery: "Tampilkan widget baterai",
   battery_charging: "Mengisi daya",
   battery_label: "Baterai",
