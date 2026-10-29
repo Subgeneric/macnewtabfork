@@ -107,13 +107,27 @@ const Weather = memo(function Weather() {
 
   if (!weatherData) return null;
 
+  if (weatherForecastDisplay === "current") {
+    return (
+      <div className="weather-widget weather-widget--current">
+        {weatherData.cityName && <span className="weather-city">{weatherData.cityName}</span>}
+        <div className="weather-main">
+          <span className="weather-temp">
+            {weatherData.temperature}
+            <span className="weather-degree">{tempSymbol}</span>
+          </span>
+          <WeatherIcon code={weatherData.conditionCode} className="weather-icon" />
+        </div>
+        <span className="weather-label">{weatherData.conditionText}</span>
+      </div>
+    );
+  }
+
   return (
     <div className={`weather-widget weather-widget--${weatherForecastDisplay}`}>
       <div className="weather-current">
         <div className="weather-current-top">
-          {weatherData.cityName && (
-            <span className="weather-city">{weatherData.cityName}</span>
-          )}
+          {weatherData.cityName && <span className="weather-city">{weatherData.cityName}</span>}
           <div className="weather-main">
             <span className="weather-temp">
               {weatherData.temperature}
@@ -129,18 +143,12 @@ const Weather = memo(function Weather() {
         <div className="weather-forecast-days">
           {weatherData.forecastDays?.map((day, index) => {
             const date = new Date(`${day.date}T12:00:00`);
-            const dayLabel = index === 0
-              ? "Today"
-              : index === 1
-                ? "Tomorrow"
-                : date.toLocaleDateString(locale, { weekday: "short" });
+            const dayLabel = index === 0 ? "Today" : index === 1 ? "Tomorrow" : date.toLocaleDateString(locale, { weekday: "short" });
             return (
               <div className="weather-forecast-day" key={day.date} title={day.conditionText}>
                 <span className="weather-forecast-day-name">{dayLabel}</span>
                 <WeatherIcon code={day.conditionCode} className="weather-forecast-day-icon" />
-                <span className="weather-forecast-day-temps">
-                  {day.maxTemperature}° <span>{day.minTemperature}°</span>
-                </span>
+                <span className="weather-forecast-day-temps">{day.maxTemperature}° <span>{day.minTemperature}°</span></span>
                 <span className="weather-forecast-rain">{day.chanceOfRain}% <span aria-hidden="true">☂</span></span>
               </div>
             );
@@ -161,7 +169,6 @@ const Weather = memo(function Weather() {
         </div>
       )}
     </div>
-  );
 });
 
 export default Weather;
