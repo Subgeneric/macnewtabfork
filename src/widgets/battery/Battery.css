@@ -2,7 +2,7 @@
   container-type: inline-size;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   align-self: start;
   justify-self: start;
@@ -10,9 +10,10 @@
   min-height: 0;
   gap: 9px;
   box-sizing: border-box;
-  width: fit-content;
-  min-width: 0;
-  max-width: 100%;
+  width: max-content;
+  min-width: max-content;
+  max-width: none;
+  flex: 0 0 auto;
   padding: 9px 12px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--theme-clr) 10%, transparent);
@@ -38,18 +39,10 @@
 .battery-widget--loading, .battery-widget--unavailable { opacity: .9; }
 .battery-widget__unavailable-text { color: var(--theme-clr); font-size: 13px; line-height: 1.4; opacity: .82; white-space: nowrap; }
 @container (max-width: 150px) {
-  .battery-widget { gap: 5px; padding: 7px; }
-  .battery-widget__arc-container { width: 34px; height: 34px; flex-basis: 34px; }
-  .battery-widget__icon img { width: 20px; height: 20px; }
+  .battery-widget { gap: 7px; padding: 8px 10px; }
+  .battery-widget__arc-container { width: 44px; height: 44px; flex-basis: 44px; }
+  .battery-widget__icon img { width: 26px; height: 26px; }
   .battery-widget__arc-bg, .battery-widget__arc-fill { stroke-width: 5.5; }
-  .battery-widget__percentage { font-size: clamp(17px, 18cqw, 23px); letter-spacing: -.7px; }
+  .battery-widget__percentage { font-size: 25px; letter-spacing: -1px; }
   .battery-widget__status { font-size: 10px; }
-}
-@container (max-width: 105px) {
-  .battery-widget { flex-direction: column; justify-content: center; gap: 3px; padding: 6px 4px; }
-  .battery-widget__arc-container { width: 30px; height: 30px; flex-basis: 30px; }
-  .battery-widget__icon img { width: 18px; height: 18px; }
-  .battery-widget__info { align-items: center; width: 100%; }
-  .battery-widget__percentage { font-size: 19px; }
-  .battery-widget__status { max-width: 100%; font-size: 9px; text-align: center; }
 }
