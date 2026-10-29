@@ -29,51 +29,27 @@ const WeatherIcon = memo(function WeatherIcon({
   isDay?: boolean;
   className?: string;
 }) {
-  const kind = getWeatherKind(code);
-  const common = {
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.8,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
+  // Keep the original emoji-style icon pack, but choose a clearer icon for
+  // each WeatherAPI condition family.
+  let icon = "🌡️";
+  let kind = "unknown";
+  if (code === 1000) { icon = "☀️"; kind = "sun"; }
+  else if (code === 1003) { icon = "🌤️"; kind = "partly-cloudy"; }
+  else if (code === 1006 || code === 1009) { icon = "☁️"; kind = "cloud"; }
+  else if ([1030, 1135, 1147].includes(code)) { icon = "🌫️"; kind = "fog"; }
+  else if ([1150, 1153, 1168, 1171].includes(code)) { icon = "🌦️"; kind = "drizzle"; }
+  else if ([1063, 1180, 1183, 1186, 1189, 1192, 1195, 1240, 1243, 1246].includes(code)) { icon = "🌧️"; kind = "rain"; }
+  else if ([1066, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1255, 1258].includes(code)) { icon = "❄️"; kind = "snow"; }
+  else if ([1069, 1072, 1198, 1201, 1204, 1207, 1237, 1249, 1252, 1261, 1264].includes(code)) { icon = "🌨️"; kind = "sleet"; }
+  else if ([1087, 1273, 1276, 1279, 1282].includes(code)) { icon = "⛈️"; kind = "thunder"; }
 
   return (
-    <svg
-      className={`weather-icon-svg weather-icon--${kind} ${className}`}
-      viewBox="0 0 40 40"
+    <span
+      className={`weather-icon-emoji weather-icon--${kind} ${className}`}
       aria-hidden="true"
-      focusable="false"
-      {...common}
     >
-      {(kind === "sun" || kind === "partly-cloudy") && (
-        <>
-          <circle cx="15" cy="14" r="6" />
-          <path d="M15 3v3 M15 22v3 M4 14h3 M23 14h3 M7.2 6.2l2.1 2.1 M20.7 19.7l2.1 2.1 M22.8 6.2l-2.1 2.1" />
-        </>
-      )}
-      {(kind === "cloud" || kind === "partly-cloudy" || kind === "fog" ||
-        kind === "drizzle" || kind === "rain" || kind === "snow" ||
-        kind === "sleet" || kind === "thunder") && (
-        <path d="M10 29h19a6 6 0 0 0 .3-12 9.5 9.5 0 0 0-18-1.7A7 7 0 0 0 10 29Z" fill="currentColor" stroke="none" />
-      )}
-      {kind === "fog" && <path d="M7 33h25 M11 37h18" />}
-      {kind === "drizzle" && <path d="M14 32l-1 2 M22 32l-1 2 M30 32l-1 2" />}
-      {kind === "rain" && <path d="M13 32l-2 4 M21 32l-2 4 M29 32l-2 4" />}
-      {kind === "snow" && (
-        <>
-          <path d="M14 32v6 M11 33.5l6 3 M17 33.5l-6 3 M26 32v6 M23 33.5l6 3 M29 33.5l-6 3" />
-        </>
-      )}
-      {kind === "sleet" && <path d="M13 32l-2 4 M23 32v6 M20 33.5l6 3 M26 33.5l-6 3" />}
-      {kind === "thunder" && <path d="M22 28l-7 7h5l-2 5 9-9h-5l2-3" fill="currentColor" stroke="none" />}
-      {kind === "unknown" && (
-        <>
-          <circle cx="20" cy="20" r="13" />
-          <path d="M20 13v9 M20 27h.01" />
-        </>
-      )}
-    </svg>
+      {icon}
+    </span>
   );
 });
 
