@@ -28,8 +28,22 @@
 .weather-main { display: flex; flex: 0 0 auto; align-items: center; gap: 6px; }
 .weather-temp { color: var(--theme-clr); font-size: 30px; font-weight: 350; letter-spacing: -1.2px; line-height: 1; white-space: nowrap; }
 .weather-degree { font-size: 14px; font-weight: 450; vertical-align: top; letter-spacing: -.3px; }
-.weather-icon-svg { display: block; flex: 0 0 auto; width: 26px; height: 26px; color: #a8d8ff; overflow: visible; }
-.weather-current-icon { width: 32px; height: 32px; }
+.weather-icon-emoji {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 24px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 16%));
+  -webkit-font-smoothing: antialiased;
+}
+.weather-current-icon { font-size: 30px; }
+.weather-forecast-day-icon { font-size: 22px; }
+.weather-forecast-hour-icon { font-size: 25px; }
+.weather-icon--sun { filter: drop-shadow(0 1px 2px rgb(255 191 54 / 28%)); }
+.weather-icon--rain, .weather-icon--drizzle, .weather-icon--snow, .weather-icon--sleet, .weather-icon--thunder { filter: drop-shadow(0 1px 2px rgb(76 166 255 / 24%)); }
 .weather-icon--sun { color: #ffbf36; }
 .weather-icon--partly-cloudy { color: #8acbff; }
 .weather-icon--cloud { color: #b8d9f4; }
@@ -91,7 +105,7 @@
   .weather-current-top { gap: 7px; }
   .weather-city { max-width: 26%; font-size: 11px; }
   .weather-temp { font-size: 26px; }
-  .weather-current-icon { width: 25px; height: 25px; }
+  .weather-current-icon { font-size: 25px; }
   .weather-label { font-size: 11px; }
   .weather-forecast-hour { flex-basis: 46px; padding: 0 3px; }
 }
