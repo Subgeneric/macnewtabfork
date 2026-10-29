@@ -222,7 +222,7 @@ const WeatherSettings = memo(function WeatherSettings() {
           ]}
           value={weatherForecastDisplay}
           onChange={(event) => {
-            setWeatherForecastDisplay(event.target.value);
+            setWeatherForecastDisplay(event.target.value as "current" | "3-day" | "hourly" | "both");
             localStorage.removeItem("macnewtab_weather_cache");
           }}
           disabled={!showWeather}
