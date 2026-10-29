@@ -4,9 +4,10 @@
   align-self: stretch;
   justify-self: stretch;
   box-sizing: border-box;
-  width: 100%;
+  width: min(560px, calc(100vw - 24px)) !important;
   min-width: 0;
-  max-width: min(560px, calc(100vw - 24px));
+  max-width: min(560px, calc(100vw - 24px)) !important;
+  flex: 0 1 560px;
   height: fit-content;
   min-height: 0;
   padding: 10px 14px;
@@ -61,7 +62,7 @@
 .weather-loading, .weather-error, .weather-api-key-needed { flex-direction: row; align-items: center; gap: 8px; }
 .weather-api-key-needed { cursor: pointer; transition: opacity .2s ease, transform .2s ease; }
 .weather-api-key-needed:hover { opacity: 1; transform: translateY(-1px); }
-.weather-widget:has(.weather-forecast-days), .weather-widget:has(.weather-forecast-hourly) { width: 100%; }
+.weather-widget:has(.weather-forecast-days), .weather-widget:has(.weather-forecast-hourly) { width: min(560px, calc(100vw - 24px)) !important; max-width: min(560px, calc(100vw - 24px)) !important; }
 
 .weather-forecast-days {
   display: grid;
