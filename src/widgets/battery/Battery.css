@@ -57,7 +57,19 @@
   filter: none;
   opacity: .9;
 }
-.theme-dark .battery-widget__icon img,
+.theme-light .battery-widget__icon img,
+.theme-blue .battery-widget__icon img,
+.theme-red .battery-widget__icon img,
+.theme-orange .battery-widget__icon img,
+.theme-purple .battery-widget__icon img,
+.theme-pink .battery-widget__icon img,
+.theme-brown .battery-widget__icon img,
+.theme-teal .battery-widget__icon img,
+.theme-mint .battery-widget__icon img,
+.theme-gold .battery-widget__icon img,
+.theme-rose .battery-widget__icon img {
+  filter: brightness(0);
+}
 .theme-system .battery-widget__icon img {
   filter: brightness(0) invert(1);
 }
