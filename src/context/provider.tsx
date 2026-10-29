@@ -1609,6 +1609,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setShowWeather,
       weatherTempUnit,
       setWeatherTempUnit,
+      weatherForecastDisplay,
+      setWeatherForecastDisplay,
       weatherLocationMode,
       setWeatherLocationMode,
       weatherManualLocation,
