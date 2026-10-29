@@ -206,6 +206,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "स्टिकी नोट्स सिंक करें",
   enable_sticky_notes_sync_description:
     "अपने Chrome खाते का उपयोग करके उपकरणों के बीच स्टिकी नोट्स सिंक करें",
+  dock_effects: "macOS-शैली डॉक इफ़ेक्ट",
+  dock_effects_description:
+    "पॉइंटर डॉक पर ले जाने पर आइकन बड़े हो जाते हैं और क्लिक करने पर उछलते हैं।",
   show_battery: "बैटरी विजेट दिखाएं",
   battery_charging: "चार्ज हो रहा है",
   battery_label: "बैटरी",

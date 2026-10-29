@@ -208,6 +208,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Синхронизировать стикеры",
   enable_sticky_notes_sync_description:
     "Синхронизировать стикеры между устройствами через аккаунт Chrome",
+  dock_effects: "Эффекты Dock в стиле macOS",
+  dock_effects_description:
+    "Значки увеличиваются при наведении указателя на Dock и подпрыгивают при нажатии.",
   show_battery: "Показывать виджет батареи",
   battery_charging: "Зарядка",
   battery_label: "Батарея",

@@ -209,6 +209,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Yopishqoq eslatmalarni sinxronlash",
   enable_sticky_notes_sync_description:
     "Chrome hisobingiz yordamida qurilmalar orasida yopishqoq eslatmalarni sinxronlang",
+  dock_effects: "macOS uslubidagi Dock effektlari",
+  dock_effects_description:
+    "Kursor Dock ustida yurganda ikonlar kattalashadi, bosilganda esa sakraydi.",
   show_battery: "Batareya vidjetini ko'rsatish",
   battery_charging: "Quvvatlanmoqda",
   battery_label: "Batareya",

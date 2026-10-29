@@ -206,6 +206,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Yapışkan Notları Senkronize Et",
   enable_sticky_notes_sync_description:
     "Chrome hesabınızı kullanarak yapışkan notları cihazlar arasında senkronize edin",
+  dock_effects: "macOS tarzı Dock efektleri",
+  dock_effects_description:
+    "İmleç Dock üzerinde gezinirken simgeler büyür, tıklandığında zıplar.",
   show_battery: "Pil Widget'ını Göster",
   battery_charging: "Şarj oluyor",
   battery_label: "Pil",

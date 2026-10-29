@@ -206,6 +206,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Sincronizar notas adesivas",
   enable_sticky_notes_sync_description:
     "Sincronize notas adesivas entre dispositivos usando sua conta do Chrome",
+  dock_effects: "Efeitos do Dock estilo macOS",
+  dock_effects_description:
+    "Os ícones aumentam quando o ponteiro passa pelo Dock e saltam ao clicar.",
   show_battery: "Mostrar widget de bateria",
   battery_charging: "Carregando",
   battery_label: "Bateria",

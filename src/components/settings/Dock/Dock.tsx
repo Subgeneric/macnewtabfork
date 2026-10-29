@@ -72,20 +72,18 @@ export default memo(function Dock() {
         <div className="dock-app__toggle-info">
           <span>
             <h3 className="dock-app__toggle-title">
-              macOS-style dock effects
+              <Translation value="dock_effects" />
             </h3>
             <h4 className="dock-app__toggle-description">
-              Magnify icons as the pointer moves over the dock and bounce icons when clicked.
+              <Translation value="dock_effects_description" />
             </h4>
           </span>
         </div>
         <Toggle
           id="dock-effects-toggle"
-          name="macOS-style dock effects toggle"
+          name="Dock effects toggle"
           isChecked={dockEffectsEnabled}
-          handleToggleChange={() =>
-            setDockEffectsEnabled(!dockEffectsEnabled)
-          }
+          handleToggleChange={() => setDockEffectsEnabled(!dockEffectsEnabled)}
         />
       </div>
 

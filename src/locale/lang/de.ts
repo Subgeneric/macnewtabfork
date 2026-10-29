@@ -209,6 +209,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Haftnotizen synchronisieren",
   enable_sticky_notes_sync_description:
     "Synchronisieren Sie Haftnotizen über Geräte hinweg mit Ihrem Chrome-Konto",
+  dock_effects: "Dock-Effekte im macOS-Stil",
+  dock_effects_description:
+    "Symbole vergrößern sich, wenn der Zeiger über das Dock fährt, und hüpfen beim Anklicken.",
   show_battery: "Batterie-Widget anzeigen",
   battery_charging: "Lädt",
   battery_label: "Batterie",

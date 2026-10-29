@@ -203,6 +203,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "스티키 노트 동기화",
   enable_sticky_notes_sync_description:
     "Chrome 계정을 사용하여 기기 간에 스티키 노트를 동기화합니다",
+  dock_effects: "macOS 스타일 Dock 효과",
+  dock_effects_description:
+    "포인터를 Dock 위로 움직이면 아이콘이 확대되고, 클릭하면 아이콘이 튀어 오릅니다.",
   show_battery: "배터리 위젯 표시",
   battery_charging: "충전 중",
   battery_label: "배터리",

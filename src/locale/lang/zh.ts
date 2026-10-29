@@ -198,6 +198,8 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "同步便签",
   enable_sticky_notes_sync_description:
     "使用您的 Chrome 帐户在设备之间同步便签",
+  dock_effects: "macOS 风格的程序坞效果",
+  dock_effects_description: "指针划过程序坞时图标会放大，点击时图标会跳动。",
   show_battery: "显示电池小部件",
   battery_charging: "充电中",
   battery_label: "电池",

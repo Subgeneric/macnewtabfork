@@ -137,7 +137,8 @@ const Dock = memo(() => {
   // setting, and need room around the icons, so they pause while the dock is
   // scrolling (too many icons to fit).
   const reducedMotion = useReducedMotion();
-  const dockEffects = dockEffectsEnabled && !reducedMotion && !isOverflowButtonVisible;
+  const dockEffects =
+    dockEffectsEnabled && !reducedMotion && !isOverflowButtonVisible;
   useEffect(() => {
     const container = containerRef.current;
     if (!dockEffects || !container) return;

@@ -206,6 +206,9 @@ const strings: Record<string, string> = {
   enable_sticky_notes_sync: "Đồng bộ ghi chú dính",
   enable_sticky_notes_sync_description:
     "Đồng bộ ghi chú dính giữa các thiết bị bằng tài khoản Chrome của bạn",
+  dock_effects: "Hiệu ứng Dock kiểu macOS",
+  dock_effects_description:
+    "Biểu tượng phóng to khi con trỏ di chuyển qua Dock và nảy lên khi được nhấp.",
   show_battery: "Hiển thị tiện ích pin",
   battery_charging: "Đang sạc",
   battery_label: "Pin",
