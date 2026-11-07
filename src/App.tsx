@@ -80,7 +80,19 @@ const App = function App() {
     return () => root.classList.remove("motion-reduced");
   }, [prefersReducedMotion]);
 
-  // App is mounted: let the boot skeleton fade out once the wallpaper is ready
+  // Keep the boot overlay's animation mode synchronized with the actual
+  // preferences. These values can settle after the first render (for example
+  // when the active space is initialized), so this must not be mount-only.
+  useEffect(() => {
+    document.documentElement.toggleAttribute(
+      "data-boot-iris",
+      enableLoadAnimation &&
+        !prefersReducedMotion &&
+        loadAnimationType === "iris-reveal",
+    );
+  }, [enableLoadAnimation, prefersReducedMotion, loadAnimationType]);
+
+  // Signal mount separately, after the animation mode has been applied.
   useEffect(() => {
     bootSignal("appMounted");
   }, []);
@@ -222,7 +234,7 @@ const App = function App() {
         (backgroundImage ? " has-bg" : "") +
         (!prefersReducedMotion && wallpaperType === "dynamic" ? " has-dynamic-bg" : "") +
         (!prefersReducedMotion && wallpaperType === "interactive" ? " has-interactive-bg" : "") +
-        (isWakingUp ? ` load-animation-${loadAnimationType}` : "")
+        (isWakingUp && loadAnimationType !== "iris-reveal" ? ` load-animation-${loadAnimationType}` : "")
       }
       style={bgStyle}
       lang={locale}

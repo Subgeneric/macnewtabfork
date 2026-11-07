@@ -81,6 +81,40 @@
     dismissed = true;
     var el = document.getElementById("boot-skeleton");
     if (!el) return;
+    // Reveal the live page through an expanding transparent circle.
+    // Animate a registered length on the lightweight skeleton overlay rather
+    // than clipping the wallpaper/widget layers underneath it.
+    if (document.documentElement.hasAttribute("data-boot-iris")) {
+      var gone = function () {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      };
+      // The mask lives on this class (see public/index.html); without it the
+      // animated radius has nothing to drive and the skeleton just pops out.
+      el.classList.add("boot-skeleton--iris");
+      var radius = Math.ceil(Math.sqrt(
+        window.innerWidth * window.innerWidth +
+        window.innerHeight * window.innerHeight
+      ));
+      try {
+        var anim = el.animate(
+          [
+            { "--iris-radius": "0px" },
+            { "--iris-radius": radius + "px" }
+          ],
+          {
+            duration: 650,
+            easing: "cubic-bezier(0.2, 0.7, 0.2, 1)",
+            fill: "forwards"
+          }
+        );
+        anim.onfinish = gone;
+        anim.oncancel = gone;
+      } catch (e) {
+        gone();
+      }
+      setTimeout(gone, 900);
+      return;
+    }
     el.classList.add("boot-skeleton--out");
     setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
