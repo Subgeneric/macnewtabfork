@@ -15,6 +15,7 @@ export const SHOW_BATTERY_LOCAL_STORAGE_KEY = "show_battery";
 export const SHOW_FREEFORM_LOCAL_STORAGE_KEY = "show_freeform";
 export const SHOW_SCREEN_RECORDER_LOCAL_STORAGE_KEY = "show_screen_recorder";
 export const ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY = "enable_load_animation";
+export const BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY = "boot_blurred_skeleton";
 export const MOTION_PREFERENCE_LOCAL_STORAGE_KEY = "motion_preference";
 export const LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY = "load_animation_type";
 export const CLOCK_STYLE_LOCAL_STORAGE_KEY = "clock_style";

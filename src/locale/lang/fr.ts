@@ -267,6 +267,7 @@ const strings: Record<string, string> = {
     "Vous pouvez la supprimer en faisant un clic droit sur la barre et en choisissant 'Hide Footer on New Tab Page'.",
   advanced: "Fonctionnalités avancées",
   enable_load_animation: "Activer l'animation de chargement",
+  boot_blurred_skeleton: "Écran de chargement avec fond flouté",
   reduced_motion: "Réduire les animations",
   motion_system: "Système",
   motion_on: "Activé",

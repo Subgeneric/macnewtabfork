@@ -297,6 +297,7 @@ const enTranslation = {
     "You can remove it by right-clicking on the bar and choosing 'Hide Footer on New Tab Page'.",
   advanced: "Advanced",
   enable_load_animation: "Enable Load Animation",
+  boot_blurred_skeleton: "Blurred wallpaper loading screen",
   reduced_motion: "Reduced motion",
   motion_system: "System",
   motion_on: "On",

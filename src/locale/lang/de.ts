@@ -269,6 +269,7 @@ const strings: Record<string, string> = {
     "Sie können sie entfernen, indem Sie mit der rechten Maustaste auf die Leiste klicken und 'Hide Footer on New Tab Page' auswählen.",
   advanced: "Erweiterte Funktionen",
   enable_load_animation: "Ladeanimation aktivieren",
+  boot_blurred_skeleton: "Unscharfer Hintergrund beim Laden",
   reduced_motion: "Bewegung reduzieren",
   motion_system: "System",
   motion_on: "An",

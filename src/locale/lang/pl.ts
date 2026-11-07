@@ -266,6 +266,7 @@ const strings: Record<string, string> = {
     "Możesz go usunąć, klikając pasek prawym przyciskiem myszy i wybierając 'Hide Footer on New Tab Page'.",
   advanced: "Zaawansowane funkcje",
   enable_load_animation: "Włącz animację ładowania",
+  boot_blurred_skeleton: "Rozmyta tapeta na ekranie ładowania",
   reduced_motion: "Ograniczony ruch",
   motion_system: "System",
   motion_on: "Włączone",

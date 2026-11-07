@@ -263,6 +263,7 @@ const strings: Record<string, string> = {
     "त्या बारवर उजवे-क्लिक करा आणि 'Hide Footer on New Tab Page' निवडल्यास ते काढता येईल.",
   advanced: "प्रगत वैशिष्ट्ये",
   enable_load_animation: "लोड ॲनिमेशन सक्षम करा",
+  boot_blurred_skeleton: "अस्पष्ट वॉलपेपर लोडिंग स्क्रीन",
   reduced_motion: "कमी हालचाल",
   motion_system: "सिस्टम",
   motion_on: "चालू",

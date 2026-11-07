@@ -262,6 +262,7 @@ const strings: Record<string, string> = {
     "해당 막대를 마우스 오른쪽 버튼으로 클릭하고 'Hide Footer on New Tab Page'를 선택하면 제거할 수 있습니다.",
   advanced: "고급 기능",
   enable_load_animation: "로드 애니메이션 활성화",
+  boot_blurred_skeleton: "흐린 배경화면 로딩 화면",
   reduced_motion: "동작 줄이기",
   motion_system: "시스템",
   motion_on: "켬",

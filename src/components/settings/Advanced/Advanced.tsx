@@ -12,6 +12,8 @@ export default function Advanced() {
     setEnableLoadAnimation,
     loadAnimationType,
     setLoadAnimationType,
+    bootBlurredSkeleton,
+    setBootBlurredSkeleton,
   } = useContext(AppContext);
 
   return (
@@ -67,6 +69,17 @@ export default function Advanced() {
           ]}
           value={loadAnimationType}
           onChange={(event) => setLoadAnimationType(event.target.value)}
+        />
+      </div>
+      <div className="general__row-item">
+        <Translation value="boot_blurred_skeleton" />
+        <Toggle
+          id="boot-blurred-skeleton-toggle"
+          name="Blurred loading screen toggle"
+          isChecked={bootBlurredSkeleton}
+          handleToggleChange={() =>
+            setBootBlurredSkeleton(!bootBlurredSkeleton)
+          }
         />
       </div>
       <Keybinds />

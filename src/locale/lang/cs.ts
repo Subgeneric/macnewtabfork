@@ -262,6 +262,7 @@ const strings: Record<string, string> = {
     "Můžete ji odstranit kliknutím pravým tlačítkem na lištu a výběrem 'Hide Footer on New Tab Page'.",
   advanced: "Pokročilé funkce",
   enable_load_animation: "Povolit animaci načítání",
+  boot_blurred_skeleton: "Rozmazaná tapeta na úvodní obrazovce",
   reduced_motion: "Omezit pohyb",
   motion_system: "Systém",
   motion_on: "Zapnuto",

@@ -256,6 +256,7 @@ const strings: Record<string, string> = {
     "右键点击该横条并选择 'Hide Footer on New Tab Page' 即可将其移除。",
   advanced: "高级功能",
   enable_load_animation: "启用加载动画",
+  boot_blurred_skeleton: "模糊壁纸加载界面",
   reduced_motion: "减少动态效果",
   motion_system: "跟随系统",
   motion_on: "开",

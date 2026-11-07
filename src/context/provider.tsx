@@ -47,6 +47,7 @@ import {
   SHOW_GOOGLE_APPS_LOCAL_STORAGE_KEY,
   SHOW_APP_STORE_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
@@ -256,6 +257,8 @@ export const AppContext = createContext({
   setUseSearchDropdown: (_: boolean) => {},
   enableLoadAnimation: false,
   setEnableLoadAnimation: (_: boolean) => {},
+  bootBlurredSkeleton: true,
+  setBootBlurredSkeleton: (_: boolean) => {},
   motionPreference: "system" as "system" | "on" | "off",
   setMotionPreference: (_: "system" | "on" | "off") => {},
   loadAnimationType: "crt-wake-up",
@@ -655,6 +658,15 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
     false,
     undefined,
+    activeSpaceId,
+  );
+
+  // Read by public/boot.js before React loads: blurred wallpaper on the
+  // loading screen (true) or the plain theme-colour skeleton (false)
+  const [bootBlurredSkeleton, setBootBlurredSkeleton] = useLocalStorage(
+    BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY,
+    true,
+    (val) => typeof val === "boolean",
     activeSpaceId,
   );
 
@@ -1494,6 +1506,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
+      bootBlurredSkeleton,
+      setBootBlurredSkeleton,
       motionPreference,
       setMotionPreference,
       loadAnimationType,
@@ -1636,6 +1650,8 @@ export default function AppProvider({ children }: { children: ReactNode }) {
       setUseSearchDropdown,
       enableLoadAnimation,
       setEnableLoadAnimation,
+      bootBlurredSkeleton,
+      setBootBlurredSkeleton,
       motionPreference,
       setMotionPreference,
       loadAnimationType,

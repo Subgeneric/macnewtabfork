@@ -267,6 +267,7 @@ const strings: Record<string, string> = {
     "Её можно скрыть, нажав правой кнопкой мыши по панели и выбрав 'Скрыть подвал на странице новой вкладки'.",
   advanced: "Дополнительно",
   enable_load_animation: "Включить анимацию загрузки",
+  boot_blurred_skeleton: "Экран загрузки с размытыми обоями",
   reduced_motion: "Уменьшить движение",
   motion_system: "Система",
   motion_on: "Вкл.",

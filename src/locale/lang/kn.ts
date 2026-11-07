@@ -259,6 +259,7 @@ const strings: Record<string, string> = {
     "ಅದನ್ನು ತೆಗೆದುಹಾಕಲು, ಬಾರ್ ಮೇಲೆ ಬಲ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು 'Hide Footer on New Tab Page' ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
   advanced: "ಸುಧಾರಿತ ವೈಶಿಷ್ಟ್ಯಗಳು",
   enable_load_animation: "ಲೋಡ್ ಅನಿಮೇಷನ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+  boot_blurred_skeleton: "ಮಸುಕಾದ ವಾಲ್‌ಪೇಪರ್ ಲೋಡಿಂಗ್ ಪರದೆ",
   reduced_motion: "ಕಡಿಮೆ ಚಲನೆ",
   motion_system: "ಸಿಸ್ಟಮ್",
   motion_on: "ಆನ್",

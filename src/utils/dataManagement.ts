@@ -15,6 +15,7 @@ import {
   SHOW_BATTERY_LOCAL_STORAGE_KEY,
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
@@ -115,6 +116,7 @@ const KEYS_TO_EXPORT = [
   SHOW_FREEFORM_LOCAL_STORAGE_KEY,
   FREEFORM_DATA_LOCAL_STORAGE_KEY,
   ENABLE_LOAD_ANIMATION_LOCAL_STORAGE_KEY,
+  BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY,
   LOAD_ANIMATION_TYPE_LOCAL_STORAGE_KEY,
   MOTION_PREFERENCE_LOCAL_STORAGE_KEY,
   KEYBINDS_ENABLED_LOCAL_STORAGE_KEY,
@@ -414,7 +416,19 @@ export const importData = (file: File): Promise<void> => {
             key === KEYBINDS_ENABLED_LOCAL_STORAGE_KEY &&
             typeof value !== "boolean"
           ) {
-            console.warn("Skipping invalid keybinds-enabled value in imported backup");
+            console.warn(
+              "Skipping invalid keybinds-enabled value in imported backup",
+            );
+            return;
+          }
+
+          if (
+            key === BOOT_BLURRED_SKELETON_LOCAL_STORAGE_KEY &&
+            typeof value !== "boolean"
+          ) {
+            console.warn(
+              "Skipping invalid boot skeleton value in imported backup",
+            );
             return;
           }
 

@@ -264,6 +264,7 @@ const strings: Record<string, string> = {
     "Anda dapat menghapusnya dengan mengklik kanan bilah tersebut dan memilih 'Hide Footer on New Tab Page'.",
   advanced: "Fitur Lanjutan",
   enable_load_animation: "Aktifkan Animasi Pemuatan",
+  boot_blurred_skeleton: "Layar muat dengan wallpaper buram",
   reduced_motion: "Kurangi gerakan",
   motion_system: "Sistem",
   motion_on: "Aktif",

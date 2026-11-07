@@ -265,6 +265,7 @@ const strings: Record<string, string> = {
     "Bạn có thể xóa nó bằng cách nhấp chuột phải vào thanh đó và chọn 'Hide Footer on New Tab Page'.",
   advanced: "Tính năng nâng cao",
   enable_load_animation: "Bật hoạt ảnh tải",
+  boot_blurred_skeleton: "Màn hình tải với hình nền làm mờ",
   reduced_motion: "Giảm chuyển động",
   motion_system: "Hệ thống",
   motion_on: "Bật",

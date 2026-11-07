@@ -264,6 +264,7 @@ const strings: Record<string, string> = {
     "বারটিতে ডান-ক্লিক করে 'Hide Footer on New Tab Page' নির্বাচন করলে এটি সরিয়ে ফেলা যাবে।",
   advanced: "উন্নত বৈশিষ্ট্য",
   enable_load_animation: "লোড অ্যানিমেশন সক্ষম করুন",
+  boot_blurred_skeleton: "ঝাপসা ওয়ালপেপার লোডিং স্ক্রিন",
   reduced_motion: "কম মোশন",
   motion_system: "সিস্টেম",
   motion_on: "চালু",

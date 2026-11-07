@@ -51,7 +51,9 @@
   // The thumbnail is written by src/utils/bootCache.ts.
   var thumb = null;
   var wpType = read("wallpaper_type", spaceId);
-  if (!wpType || wpType === "image") {
+  // "boot_blurred_skeleton" (Settings > Advanced): off = plain theme colour
+  var blurOn = read("boot_blurred_skeleton", spaceId) !== "false";
+  if (blurOn && (!wpType || wpType === "image")) {
     try {
       var cache = JSON.parse(localStorage.getItem("boot_cache") || "{}");
       var entry = cache && cache[spaceId];

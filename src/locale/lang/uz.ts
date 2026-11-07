@@ -268,6 +268,7 @@ const strings: Record<string, string> = {
     "Uni olib tashlash uchun chiziqni o'ng tugma bilan bosing va 'Hide Footer on New Tab Page' ni tanlang.",
   advanced: "Kengaytirilgan xususiyatlar",
   enable_load_animation: "Yuklash animatsiyasini yoqish",
+  boot_blurred_skeleton: "Xiralashtirilgan fon bilan yuklanish ekrani",
   reduced_motion: "Harakatni kamaytirish",
   motion_system: "Tizim",
   motion_on: "Yoqilgan",

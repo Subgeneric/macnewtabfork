@@ -265,6 +265,7 @@ const strings: Record<string, string> = {
     "Çubuğa sağ tıklayıp 'Hide Footer on New Tab Page' seçeneğini seçerek kaldırabilirsiniz.",
   advanced: "Gelişmiş Özellikler",
   enable_load_animation: "Yükleme Animasyonunu Etkinleştir",
+  boot_blurred_skeleton: "Bulanık duvar kağıdı yükleme ekranı",
   reduced_motion: "Azaltılmış hareket",
   motion_system: "Sistem",
   motion_on: "Açık",

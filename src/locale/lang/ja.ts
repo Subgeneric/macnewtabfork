@@ -265,6 +265,7 @@ const strings: Record<string, string> = {
     "バーを右クリックして 'Hide Footer on New Tab Page' を選択すると消すことができます。",
   advanced: "高度な機能",
   enable_load_animation: "読み込みアニメーションを有効にする",
+  boot_blurred_skeleton: "ぼかした壁紙の読み込み画面",
   reduced_motion: "動きを減らす",
   motion_system: "システム",
   motion_on: "オン",
